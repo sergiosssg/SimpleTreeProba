@@ -31,7 +31,17 @@ namespace TreeLib
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ITreeNode<IElementOfTreeContent>> GetChildren()
+        {
+            throw new NotImplementedException();
+        }
+
         public IElementOfTreeContent GetCurrentElement()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ITreeNode<IElementOfTreeContent> GetParent()
         {
             throw new NotImplementedException();
         }

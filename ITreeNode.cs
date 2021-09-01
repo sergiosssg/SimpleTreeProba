@@ -4,10 +4,14 @@ using System.Text;
 
 namespace TreeLib
 {
-    public interface ITreeNode<IElementOfTree>
+    public interface ITreeNode<  T >
     {
         public bool AmIleaf();
 
-        public IElementOfTree GetCurrentElement();
+        public T GetCurrentElement();
+
+        public ITreeNode< T > GetParent();
+
+        public IEnumerable<ITreeNode<T>> GetChildren();
     }
 }
