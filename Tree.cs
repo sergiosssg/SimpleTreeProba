@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TreeLib
 {
-    public class Tree<IElementOfTreeContent>
+    public class Tree<IElementOfTreeContent> : ITreeNode<IElementOfTreeContent>
     {
         public Tree()
         {
@@ -16,9 +16,24 @@ namespace TreeLib
 
         }
 
+        public Tree(ITreeNode<IElementOfTreeContent> currentNode)
+        {
+
+        }
+
         public Tree(Tree<IElementOfTreeContent> subTree)
         {
 
+        }
+
+        public bool AmIleaf()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IElementOfTreeContent GetCurrentElement()
+        {
+            throw new NotImplementedException();
         }
     }
 }
