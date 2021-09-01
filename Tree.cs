@@ -6,6 +6,9 @@ namespace TreeLib
 {
     public class Tree<IElementOfTreeContent> : ITreeNode<IElementOfTreeContent>
     {
+        private ITreeNode<IElementOfTreeContent> _parent;
+        private IList<ITreeNode<IElementOfTreeContent>> _children;
+
         public Tree()
         {
 
@@ -16,15 +19,11 @@ namespace TreeLib
 
         }
 
-        public Tree(ITreeNode<IElementOfTreeContent> currentNode)
+        public Tree(ITreeNode<IElementOfTreeContent> parentNode)
         {
 
         }
 
-        public Tree(Tree<IElementOfTreeContent> subTree)
-        {
-
-        }
 
         public bool AmIleaf()
         {
