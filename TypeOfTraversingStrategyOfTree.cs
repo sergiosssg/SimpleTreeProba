@@ -6,5 +6,7 @@ namespace TreeLib
 {
     public enum TypeOfTraversingStrategyOfTree
     {
+        WIDTH_FIRST,
+        DEPTH_FIRST
     }
 }
