@@ -4,43 +4,48 @@ using System.Text;
 
 namespace TreeLib
 {
-    public class Tree<IElementOfTreeContent> : ITreeNode<IElementOfTreeContent>
+    public class Tree<T> : ITreeNode<T> where T : IElementOfTreeContent
     {
-        private ITreeNode<IElementOfTreeContent> _parent;
-        private IList<ITreeNode<IElementOfTreeContent>> _children;
+        private ITreeNode<T> _parent;
+        private IList<ITreeNode<T>> _children;
 
         public Tree()
         {
 
         }
 
-        public Tree(IElementOfTreeContent contentElement)
+        public Tree(T contentElement)
         {
 
         }
 
-        public Tree(ITreeNode<IElementOfTreeContent> parentNode)
+        public Tree(ITreeNode<T> parentNode)
         {
 
         }
 
+
+        public Tree(ITreeNode<T> parentNode, IEnumerable<ITreeNode<T>> childen)
+        {
+
+        }
 
         public bool AmIleaf()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ITreeNode<IElementOfTreeContent>> GetChildren()
+        public IEnumerable<ITreeNode<T>> GetChildren()
         {
             throw new NotImplementedException();
         }
 
-        public IElementOfTreeContent GetCurrentElement()
+        public ITreeNode<T> GetParent()
         {
             throw new NotImplementedException();
         }
 
-        public ITreeNode<IElementOfTreeContent> GetParent()
+        T ITreeNode<T>.GetCurrentElement()
         {
             throw new NotImplementedException();
         }
