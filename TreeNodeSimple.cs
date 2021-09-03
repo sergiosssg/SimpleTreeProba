@@ -22,5 +22,15 @@ namespace TreeLib
         {
             throw new NotImplementedException();
         }
+
+        public bool HaveIparent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HaveIchildren()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

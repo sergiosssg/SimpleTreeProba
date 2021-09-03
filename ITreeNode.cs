@@ -8,6 +8,10 @@ namespace TreeLib
     {
         public bool AmIleaf();
 
+        public bool HaveIparent();
+
+        public bool HaveIchildren();
+
         public T GetCurrentElement();
 
         public ITreeNode<T> GetParent();
