@@ -24,6 +24,32 @@ namespace TreeLib
             _elementOfTreeContent = contentElement;
         }
 
+
+        public Tree(ITreeNode<T> treeNode)
+        {
+            if(treeNode != null && treeNode is Tree<T>)
+            {
+                Tree<T> newTree = (Tree<T>)treeNode;
+                this._elementOfTreeContent = newTree._elementOfTreeContent;
+                this._AmIleaf = newTree._AmIleaf;
+                this._parent = newTree._parent;
+                this._children = newTree._children;
+            }else if(treeNode != null && treeNode is TreeNodeSimple<T>)
+            {
+                TreeNodeSimple<T> newNodeSimple = (TreeNodeSimple<T>)treeNode;
+                this._elementOfTreeContent = newNodeSimple.GetCurrentElement();
+                this._AmIleaf = true;
+                this._parent = newNodeSimple.GetParent();
+
+                var childrenListOfTreeNode = new List<ITreeNode<T>>();
+                childrenListOfTreeNode.Clear();
+
+                this._children = childrenListOfTreeNode;
+            }
+
+        }
+
+
         public Tree(T contentElement, ITreeNode<T> parentNode) : this (contentElement)
         {
             _parent = parentNode;
