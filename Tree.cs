@@ -12,14 +12,14 @@ namespace TreeLib
         private ITreeNode<T> _parent;
         private IList<ITreeNode<T>> _children;
 
-        public Tree()
+        private Tree()
         {
             _AmIleaf = true;
         }
 
         public Tree(T contentElement) : this()
         {
-
+            _lementOfTreeContent = contentElement;
         }
 
         public Tree(ITreeNode<T> parentNode)
