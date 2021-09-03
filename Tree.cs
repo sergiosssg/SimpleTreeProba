@@ -15,6 +15,8 @@ namespace TreeLib
         private Tree()
         {
             _AmIleaf = true;
+            _children = new List<ITreeNode<T>>();
+            _children.Clear();
         }
 
         public Tree(T contentElement) : this()
@@ -22,9 +24,9 @@ namespace TreeLib
             _elementOfTreeContent = contentElement;
         }
 
-        public Tree(T contentElement, ITreeNode<T> parentNode)
+        public Tree(T contentElement, ITreeNode<T> parentNode) : this (contentElement)
         {
-
+            _parent = parentNode;
         }
 
 

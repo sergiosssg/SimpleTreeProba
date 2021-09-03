@@ -30,7 +30,9 @@ namespace TreeLib
 
         public IEnumerable<ITreeNode<T>> GetChildren()
         {
-            throw new NotImplementedException();
+            var returnedListOfTreeNode = new List<ITreeNode<T>>();
+            returnedListOfTreeNode.Clear();
+            return returnedListOfTreeNode;
         }
 
         public ITreeNode<T> GetParent()
