@@ -6,7 +6,7 @@ namespace TreeLib
 {
     public class Tree<T> : ITreeNode<T> where T : IElementOfTreeContent
     {
-        private T _lementOfTreeContent;
+        private T _elementOfTreeContent;
 
         private bool _AmIleaf;
         private ITreeNode<T> _parent;
@@ -19,7 +19,7 @@ namespace TreeLib
 
         public Tree(T contentElement) : this()
         {
-            _lementOfTreeContent = contentElement;
+            _elementOfTreeContent = contentElement;
         }
 
         public Tree(T contentElement, ITreeNode<T> parentNode)
@@ -34,7 +34,7 @@ namespace TreeLib
         }
 
         public bool AmIleaf() => _AmIleaf;
-        T ITreeNode<T>.GetCurrentElement() => _lementOfTreeContent;
+        T ITreeNode<T>.GetCurrentElement() => _elementOfTreeContent;
 
 
         public IEnumerable<ITreeNode<T>> GetChildren()

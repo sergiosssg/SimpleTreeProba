@@ -7,10 +7,10 @@ namespace TreeLib
     public class TreeNodeSimple<T> : ITreeNode<T> where T : IElementOfTreeContent
     {
 
-        private T _lementOfTreeContent;
+        private T _elementOfTreeContent;
 
         public bool AmIleaf() => true;
-        public T GetCurrentElement() => _lementOfTreeContent;
+        public T GetCurrentElement() => _elementOfTreeContent;
 
 
         public IEnumerable<ITreeNode<T>> GetChildren()
