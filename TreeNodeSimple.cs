@@ -7,7 +7,22 @@ namespace TreeLib
     public class TreeNodeSimple<T> : ITreeNode<T> where T : IElementOfTreeContent
     {
 
+        bool _emptyNode;
         private T _elementOfTreeContent;
+
+
+
+        public static ITreeNode<T> CreateEmptyNode()
+        {
+
+            return new TreeNodeSimple<T>();
+        }
+
+
+        public TreeNodeSimple()
+        {
+            this._emptyNode = true;
+        }
 
         public bool AmIleaf() => true;
         public T GetCurrentElement() => _elementOfTreeContent;

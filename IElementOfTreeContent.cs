@@ -7,5 +7,7 @@ namespace TreeLib
     public interface IElementOfTreeContent
     {
         public string GetStringValue();
+
+        public bool IsEmpty();
     }
 }
