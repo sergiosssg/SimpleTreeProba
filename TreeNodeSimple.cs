@@ -7,16 +7,13 @@ namespace TreeLib
     public class TreeNodeSimple<T> : ITreeNode<T> where T : IElementOfTreeContent
     {
 
+        private T _lementOfTreeContent;
 
         public bool AmIleaf() => true;
+        public T GetCurrentElement() => _lementOfTreeContent;
 
 
         public IEnumerable<ITreeNode<T>> GetChildren()
-        {
-            throw new NotImplementedException();
-        }
-
-        public T GetCurrentElement()
         {
             throw new NotImplementedException();
         }

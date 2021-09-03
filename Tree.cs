@@ -6,6 +6,8 @@ namespace TreeLib
 {
     public class Tree<T> : ITreeNode<T> where T : IElementOfTreeContent
     {
+        private T _lementOfTreeContent;
+
         private bool _AmIleaf;
         private ITreeNode<T> _parent;
         private IList<ITreeNode<T>> _children;
@@ -32,6 +34,8 @@ namespace TreeLib
         }
 
         public bool AmIleaf() => _AmIleaf;
+        T ITreeNode<T>.GetCurrentElement() => _lementOfTreeContent;
+
 
         public IEnumerable<ITreeNode<T>> GetChildren()
         {
@@ -39,11 +43,6 @@ namespace TreeLib
         }
 
         public ITreeNode<T> GetParent()
-        {
-            throw new NotImplementedException();
-        }
-
-        T ITreeNode<T>.GetCurrentElement()
         {
             throw new NotImplementedException();
         }
