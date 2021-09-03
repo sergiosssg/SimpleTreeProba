@@ -22,13 +22,13 @@ namespace TreeLib
             _lementOfTreeContent = contentElement;
         }
 
-        public Tree(ITreeNode<T> parentNode)
+        public Tree(T contentElement, ITreeNode<T> parentNode)
         {
 
         }
 
 
-        public Tree(ITreeNode<T> parentNode, IEnumerable<ITreeNode<T>> childen)
+        public Tree(T contentElement, ITreeNode<T> parentNode, IEnumerable<ITreeNode<T>> childen)
         {
 
         }
