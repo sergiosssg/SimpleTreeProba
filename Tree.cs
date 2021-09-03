@@ -40,11 +40,6 @@ namespace TreeLib
                 this._elementOfTreeContent = newNodeSimple.GetCurrentElement();
                 this._AmIleaf = true;
                 this._parent = newNodeSimple.GetParent();
-
-                var childrenListOfTreeNode = new List<ITreeNode<T>>();
-                childrenListOfTreeNode.Clear();
-
-                this._children = childrenListOfTreeNode;
             }
 
         }
