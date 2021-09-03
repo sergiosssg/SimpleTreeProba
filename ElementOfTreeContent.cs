@@ -7,20 +7,26 @@ namespace TreeLib
     public class ElementOfTreeContent : IElementOfTreeContent
     {
 
-        bool _empty;
+        private bool _empty;
+
+        private string _stringValue;
 
 
         public ElementOfTreeContent()
         {
             this._empty = true;
+            this._stringValue = string.Empty;
+        }
+
+        public ElementOfTreeContent(string newStringValue)
+        {
+            this._empty = false;
+            this._stringValue = newStringValue;
         }
 
 
         public bool IsEmpty() => _empty;
 
-        public string GetStringValue()
-        {
-            throw new NotImplementedException();
-        }
+        public string GetStringValue() => _stringValue;
     }
 }
