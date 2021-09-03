@@ -9,12 +9,13 @@ namespace TreeLib
         private T _elementOfTreeContent;
 
         private bool _AmIleaf;
-        private ITreeNode<T> _parent;
+        private ITreeNode<T>? _parent;
         private IList<ITreeNode<T>> _children;
 
         private Tree()
         {
             _AmIleaf = true;
+            _parent = null;
             _children = new List<ITreeNode<T>>();
             _children.Clear();
         }
@@ -72,7 +73,8 @@ namespace TreeLib
 
         public bool HaveIparent()
         {
-            throw new NotImplementedException();
+            if (_parent == null) return false;
+            else return true;
         }
 
         public bool HaveIchildren()
