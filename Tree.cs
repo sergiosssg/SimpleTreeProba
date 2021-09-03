@@ -6,15 +6,16 @@ namespace TreeLib
 {
     public class Tree<T> : ITreeNode<T> where T : IElementOfTreeContent
     {
+        private bool _AmIleaf;
         private ITreeNode<T> _parent;
         private IList<ITreeNode<T>> _children;
 
         public Tree()
         {
-
+            _AmIleaf = true;
         }
 
-        public Tree(T contentElement)
+        public Tree(T contentElement) : this()
         {
 
         }
@@ -30,10 +31,7 @@ namespace TreeLib
 
         }
 
-        public bool AmIleaf()
-        {
-            throw new NotImplementedException();
-        }
+        public bool AmIleaf() => _AmIleaf;
 
         public IEnumerable<ITreeNode<T>> GetChildren()
         {
