@@ -25,7 +25,7 @@ namespace TreeLib
         }
 
 
-        public Tree(ITreeNode<T> treeNode)
+        public Tree(ITreeNode<T> treeNode) : this()
         {
             if(treeNode != null && treeNode is Tree<T>)
             {
