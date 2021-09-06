@@ -9,7 +9,7 @@ namespace TreeLib
         private T _elementOfTreeContent;
 
         private bool _AmIleaf;
-        private ITreeNode<T>? _parent;
+        private ITreeNode<T> _parent;
         private IList<ITreeNode<T>> _children;
 
         private Tree()
