@@ -17,16 +17,20 @@ namespace TreeLib
     public class TraverserOfTree<I> where I : IElementOfTreeContent
     {
 
+        private TypeOfTraversingStrategyOfTree _typeOfTraversingStrategyOfTree;
 
         private bool _isConstintentState;
 
         private PredicateForTraversingOfTreeByNode _predicateIsFoundNode;
         private ITreeNode<I> _treeNode;
 
+        private MakeupCandidatesOfTreeNodesForTraversing _delegateMakeupCandidatesOfTreeNodesForTraversing;
+
 
         public TraverserOfTree()
         {
-            _isConstintentState = true;
+            this._typeOfTraversingStrategyOfTree = TypeOfTraversingStrategyOfTree.DEPTH_FIRST;
+            this._isConstintentState = true;
         }
 
         public TraverserOfTree(ITreeNode<I> treeNode) : this()
@@ -40,6 +44,20 @@ namespace TreeLib
             this._predicateIsFoundNode = predicateIsFoundNode;
         }
 
+
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForTraversingOfTreeByNode predicateIsFoundNode, 
+            TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree) : this(treeNode, predicateIsFoundNode)
+        {
+            this._typeOfTraversingStrategyOfTree = typeOfTraversingStrategyOfTree;
+        }
+
+
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForTraversingOfTreeByNode predicateIsFoundNode,
+            TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree,
+            MakeupCandidatesOfTreeNodesForTraversing makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateIsFoundNode, typeOfTraversingStrategyOfTree)
+        {
+            this._delegateMakeupCandidatesOfTreeNodesForTraversing = makeupCandidatesOfTreeNodesForTraversing;
+        }
 
         public bool IsConstintentState
         {
