@@ -49,5 +49,14 @@ namespace TreeLib
         }
 
 
+        public PredicateForTraversingOfTreeByNode PredicateForTraversingOfTreeByNodeIn
+        {
+            set
+            {
+                _predicateIsFoundNode = value;
+            }
+        }
+
+
     }
 }
