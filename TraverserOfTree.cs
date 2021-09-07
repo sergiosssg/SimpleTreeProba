@@ -58,9 +58,16 @@ namespace TreeLib
         }
 
 
-        public bool  JumpIntoNextNodeByNodeSample(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample)
+        public bool  JumpIntoNextNodeByNodeSample(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample, out ITreeNode<I> treeNode)
         {
+            treeNode = null;
 
+            if (treeNodeWhereSearching == null || nodeForSearchingSample == null) return false;
+            if(treeNodeWhereSearching == nodeForSearchingSample)
+            {
+                treeNode = treeNodeWhereSearching;
+                return true;
+            }
 
 
             return false;
