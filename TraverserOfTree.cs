@@ -4,11 +4,14 @@ using System.Text;
 
 namespace TreeLib
 {
+
+    public delegate bool PredicateForTraversingOfTree(ITreeNode<IElementOfTreeContent> treeNode, IElementOfTreeContent contentForSearching);
+
     public class TraverserOfTree<I> where I : IElementOfTreeContent
     {
 
 
-        private Predicate<ITreeNode<I>> _predicateIsFoundNode;
+        private PredicateForTraversingOfTree _predicateIsFoundNode;
         private ITreeNode<I> _treeNode;
 
 
@@ -23,7 +26,7 @@ namespace TreeLib
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, Predicate<ITreeNode<I>> predicateIsFoundNode) : this(treeNode)
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForTraversingOfTree predicateIsFoundNode) : this(treeNode)
         {
             this._predicateIsFoundNode = predicateIsFoundNode;
         }
