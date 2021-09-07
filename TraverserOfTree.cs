@@ -11,13 +11,15 @@ namespace TreeLib
     {
 
 
+        private bool _isConstintentState;
+
         private PredicateForTraversingOfTree _predicateIsFoundNode;
         private ITreeNode<I> _treeNode;
 
 
         public TraverserOfTree()
         {
-
+            _isConstintentState = true;
         }
 
         public TraverserOfTree(ITreeNode<I> treeNode)
