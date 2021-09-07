@@ -5,7 +5,9 @@ using System.Text;
 namespace TreeLib
 {
 
-    public delegate bool PredicateForTraversingOfTree(ITreeNode<IElementOfTreeContent> treeNode, IElementOfTreeContent contentForSearching);
+    public delegate bool PredicateForTraversingOfTreeByNode(
+                       ITreeNode<IElementOfTreeContent> treeNodeWhereSearching, 
+                       in ITreeNode<IElementOfTreeContent> nodeForSearchingSample);
 
     public class TraverserOfTree<I> where I : IElementOfTreeContent
     {
@@ -13,7 +15,7 @@ namespace TreeLib
 
         private bool _isConstintentState;
 
-        private PredicateForTraversingOfTree _predicateIsFoundNode;
+        private PredicateForTraversingOfTreeByNode _predicateIsFoundNode;
         private ITreeNode<I> _treeNode;
 
 
@@ -22,15 +24,28 @@ namespace TreeLib
             _isConstintentState = true;
         }
 
-        public TraverserOfTree(ITreeNode<I> treeNode)
+        public TraverserOfTree(ITreeNode<I> treeNode) : this()
         {
             this._treeNode = treeNode;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForTraversingOfTree predicateIsFoundNode) : this(treeNode)
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForTraversingOfTreeByNode predicateIsFoundNode) : this(treeNode)
         {
             this._predicateIsFoundNode = predicateIsFoundNode;
+        }
+
+
+        public bool IsConstintentState
+        {
+            get
+            {
+                return _isConstintentState;
+            }
+            set
+            {
+                _isConstintentState = value;
+            }
         }
 
 
