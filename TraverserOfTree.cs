@@ -63,11 +63,11 @@ namespace TreeLib
         {
             get
             {
-                return _isConstintentState;
+                return this._isConstintentState;
             }
             set
             {
-                _isConstintentState = value;
+                this._isConstintentState = value;
             }
         }
 
@@ -76,7 +76,16 @@ namespace TreeLib
         {
             set
             {
-                _predicateIsFoundNode = value;
+                this._predicateIsFoundNode = value;
+            }
+        }
+
+
+        public MakeupCandidatesOfTreeNodesForTraversing DelegateMakeupCandidatesOfTreeNodesForTraversingOfTree
+        {
+            set
+            {
+                this._delegateMakeupCandidatesOfTreeNodesForTraversing = value;
             }
         }
 
