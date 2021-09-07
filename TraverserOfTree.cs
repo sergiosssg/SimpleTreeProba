@@ -9,6 +9,11 @@ namespace TreeLib
                        ITreeNode<IElementOfTreeContent> treeNodeWhereSearching, 
                        in ITreeNode<IElementOfTreeContent> nodeForSearchingSample);
 
+    public delegate IEnumerable<ITreeNode<IElementOfTreeContent>> MakeupCandidatesOfTreeNodesForTraversing(
+                       in ITreeNode<IElementOfTreeContent> treeNodeWhereSearching,
+                       TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree);
+
+
     public class TraverserOfTree<I> where I : IElementOfTreeContent
     {
 
