@@ -104,7 +104,12 @@ namespace TreeLib
                 TreeNodeSimple<I> tNodeWhereSearch = (TreeNodeSimple<I>)treeNodeWhereSearching;
                 TreeNodeSimple<I> tNodeSample = (TreeNodeSimple<I>)nodeForSearchingSample;
 
-                _predicateIsFoundNode(tNodeWhereSearch, tNodeSample);
+                bool returnOfPredicate = _predicateIsFoundNode(tNodeWhereSearch, tNodeSample);
+                if (returnOfPredicate)
+                {
+                    treeNode = tNodeWhereSearch;
+                }
+                return returnOfPredicate;
             }
 
             return false;
