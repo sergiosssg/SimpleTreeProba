@@ -4,18 +4,17 @@ using System.Text;
 
 namespace TreeLib
 {
-
-    public delegate bool PredicateForTraversingOfTreeByNode(
-                       ITreeNode<IElementOfTreeContent> treeNodeWhereSearching, 
-                       in ITreeNode<IElementOfTreeContent> nodeForSearchingSample);
-
-    public delegate IEnumerable<ITreeNode<IElementOfTreeContent>> MakeupCandidatesOfTreeNodesForTraversing(
-                       in ITreeNode<IElementOfTreeContent> treeNodeWhereSearching,
-                       TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree);
-
-
     public class TraverserOfTree<I> where I : IElementOfTreeContent
     {
+
+        public delegate bool PredicateForTraversingOfTreeByNode(
+                       ITreeNode<I> treeNodeWhereSearching,
+                       in ITreeNode<I> nodeForSearchingSample);
+
+        public delegate IEnumerable<ITreeNode<I>> MakeupCandidatesOfTreeNodesForTraversing(
+                       in ITreeNode<I> treeNodeWhereSearching,
+                       TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree);
+
 
         private TypeOfTraversingStrategyOfTree _typeOfTraversingStrategyOfTree;
 
@@ -100,7 +99,13 @@ namespace TreeLib
                 treeNode = treeNodeWhereSearching;
                 return true;
             }
+            if(treeNodeWhereSearching is TreeNodeSimple<I> && nodeForSearchingSample is TreeNodeSimple<I>)
+            {
+                TreeNodeSimple<I> tNodeWhereSearch = (TreeNodeSimple<I>)treeNodeWhereSearching;
+                TreeNodeSimple<I> tNodeSample = (TreeNodeSimple<I>)nodeForSearchingSample;
 
+                _predicateIsFoundNode(tNodeWhereSearch, tNodeSample);
+            }
 
             return false;
         }
