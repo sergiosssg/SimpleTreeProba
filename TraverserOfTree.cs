@@ -8,15 +8,26 @@ namespace TreeLib
     {
 
 
+        private Predicate<ITreeNode<I>> _predicateIsFoundNode;
+        private ITreeNode<I> _treeNode;
+
+
         public TraverserOfTree()
         {
 
         }
 
-        public TraverserOfTree(Tree<I> tree)
+        public TraverserOfTree(ITreeNode<I> treeNode)
         {
-
+            this._treeNode = treeNode;
         }
+
+
+        public TraverserOfTree(ITreeNode<I> treeNode, Predicate<ITreeNode<I>> predicateIsFoundNode) : this(treeNode)
+        {
+            this._predicateIsFoundNode = predicateIsFoundNode;
+        }
+
 
     }
 }
