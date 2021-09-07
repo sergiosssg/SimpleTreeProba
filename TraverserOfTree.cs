@@ -58,5 +58,15 @@ namespace TreeLib
         }
 
 
+        public bool  JumpIntoNextNodeByNodeSample(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample)
+        {
+
+
+
+            return false;
+        }
+
+
+
     }
 }
