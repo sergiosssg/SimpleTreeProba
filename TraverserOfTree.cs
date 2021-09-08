@@ -92,25 +92,24 @@ namespace TreeLib
         public bool  JumpIntoNextNodeByNodeSample(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample, out ITreeNode<I> treeNode)
         {
             treeNode = null;
-
-            if (treeNodeWhereSearching == null || nodeForSearchingSample == null) return false;
+            if (!_isConstintentState ||  treeNodeWhereSearching == null || nodeForSearchingSample == null) return false;
             if(treeNodeWhereSearching == nodeForSearchingSample)
             {
                 treeNode = treeNodeWhereSearching;
                 return true;
             }
-            if(treeNodeWhereSearching is TreeNodeSimple<I> && nodeForSearchingSample is TreeNodeSimple<I>)
+            if((treeNodeWhereSearching is TreeNodeSimple<I> && nodeForSearchingSample is TreeNodeSimple<I>) || (treeNodeWhereSearching is Tree<I> && nodeForSearchingSample is Tree<I>))
             {
-                TreeNodeSimple<I> tNodeWhereSearch = (TreeNodeSimple<I>)treeNodeWhereSearching;
-                TreeNodeSimple<I> tNodeSample = (TreeNodeSimple<I>)nodeForSearchingSample;
-
-                bool returnOfPredicate = _predicateIsFoundNode(tNodeWhereSearch, tNodeSample);
+                bool returnOfPredicate = _predicateIsFoundNode( treeNodeWhereSearching, nodeForSearchingSample);
                 if (returnOfPredicate)
                 {
-                    treeNode = tNodeWhereSearch;
+                    treeNode = treeNodeWhereSearching;
                 }
                 return returnOfPredicate;
             }
+
+            IEnumerable<ITreeNode<I>> treeNodeCandidates = _delegateMakeupCandidatesOfTreeNodesForTraversing(in treeNodeWhereSearching, _typeOfTraversingStrategyOfTree);
+
 
             return false;
         }
