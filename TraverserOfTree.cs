@@ -107,15 +107,23 @@ namespace TreeLib
                 }
                 return returnOfPredicate;
             }
+            if (_predicateIsFoundNode(treeNodeWhereSearching, nodeForSearchingSample))
+            {
+                treeNode = treeNodeWhereSearching;
+                return true;
+            }
 
             IEnumerable<ITreeNode<I>> treeNodeCandidates = _delegateMakeupCandidatesOfTreeNodesForTraversing(in treeNodeWhereSearching, _typeOfTraversingStrategyOfTree);
 
-            foreach(var OneTreeNode in treeNodeCandidates)
+            foreach(var oneTreeNode in treeNodeCandidates)
             {
-                
+                bool returnOfPredicate = JumpIntoNextNodeByNodeSample( oneTreeNode, nodeForSearchingSample, out treeNode);
+                if (returnOfPredicate)
+                {
+                    treeNode = oneTreeNode;
+                    return true;
+                }
             }
-
-
             return false;
         }
 
