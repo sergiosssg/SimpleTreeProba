@@ -98,7 +98,7 @@ namespace TreeLib
                 treeNode = treeNodeWhereSearching;
                 return true;
             }
-            if((treeNodeWhereSearching is TreeNodeSimple<I> && nodeForSearchingSample is TreeNodeSimple<I>) || (treeNodeWhereSearching is Tree<I> && nodeForSearchingSample is Tree<I>))
+            if(treeNodeWhereSearching.AmIleaf() && nodeForSearchingSample.AmIleaf())
             {
                 bool returnOfPredicate = _predicateIsFoundNode( treeNodeWhereSearching, nodeForSearchingSample);
                 if (returnOfPredicate)
@@ -109,6 +109,11 @@ namespace TreeLib
             }
 
             IEnumerable<ITreeNode<I>> treeNodeCandidates = _delegateMakeupCandidatesOfTreeNodesForTraversing(in treeNodeWhereSearching, _typeOfTraversingStrategyOfTree);
+
+            foreach(var OneTreeNode in treeNodeCandidates)
+            {
+                
+            }
 
 
             return false;
