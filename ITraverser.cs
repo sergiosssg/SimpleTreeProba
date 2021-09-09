@@ -15,5 +15,10 @@ namespace TreeLib
                        TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree);
 
 
+        public bool IsConstintentState
+        {
+            get;
+        }
+
     }
 }
