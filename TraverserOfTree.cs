@@ -93,7 +93,7 @@ namespace TreeLib
         {
             treeNode = null;
             if (!_isConstintentState ||  treeNodeWhereSearching == null || nodeForSearchingSample == null) return false;
-            if(treeNodeWhereSearching == nodeForSearchingSample)
+            if(treeNodeWhereSearching == nodeForSearchingSample || treeNodeWhereSearching.Equals(nodeForSearchingSample))
             {
                 treeNode = treeNodeWhereSearching;
                 return true;
