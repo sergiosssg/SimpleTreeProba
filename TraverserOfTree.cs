@@ -80,8 +80,12 @@ namespace TreeLib
             }
         }
 
+        public bool SearchNodeInTree(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample, out ITreeNode<I> treeNode, TypeOfComparingStrategyOfTreeNode typeOfComparingStrategyOfTreeNode)
+        {
+            throw new NotImplementedException();
+        }
 
-        public bool  JumpIntoNextNodeByNodeSample(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample, out ITreeNode<I> treeNode)
+        protected bool  JumpIntoNextNodeByNodeSample(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample, out ITreeNode<I> treeNode)
         {
             treeNode = null;
             if (!_isConstintentState ||  treeNodeWhereSearching == null || nodeForSearchingSample == null) return false;

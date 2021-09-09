@@ -20,5 +20,12 @@ namespace TreeLib
             get;
         }
 
+        public bool SearchNodeInTree(
+                                      in ITreeNode<I> treeNodeWhereSearching,
+                                      in ITreeNode<I> nodeForSearchingSample,
+                                      out ITreeNode<I> treeNode,
+                                      TypeOfComparingStrategyOfTreeNode typeOfComparingStrategyOfTreeNode);
+
+
     }
 }
