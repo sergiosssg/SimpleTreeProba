@@ -55,5 +55,19 @@ namespace TreeLib
         public bool IsResultRepresantedByTreeNode() => this._founndByTreeNode;
         public bool ISResultRepresantedByThopology() => this._foundByThopology;
 
+        public I FoundElementOfTreeContent
+        {
+            get => this._foundElementOfTreeContent;
+        }
+
+        public ITreeNode<I> FoundTreeNode
+        {
+            get => this._foundTreeNode;
+        }
+
+        public Tuple<int, int> FoundThopology
+        {
+            get =>  new Tuple<int, int>(this._depthLevel, this._siblingOrder); 
+        }
     }
 }
