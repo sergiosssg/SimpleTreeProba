@@ -80,7 +80,7 @@ namespace TreeLib
             }
         }
 
-        public bool SearchNodeInTree(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample, out ITreeNode<I> treeNode, TypeOfComparingStrategyOfTreeNode typeOfComparingStrategyOfTreeNode)
+        public bool SearchNodeInTree(in ITreeNode<I> treeNodeWhereSearching, in GoalOfSearchInTree<I> goalOfSearchInTree)
         {
             throw new NotImplementedException();
         }
