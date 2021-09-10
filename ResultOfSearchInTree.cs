@@ -13,7 +13,47 @@ namespace TreeLib
         private ITreeNode<I> _foundTreeNode;
         private bool _foundByThopology;
         private int _depthLevel;
-        private int siblingOrder;
+        private int _siblingOrder;
+
+        public ResultOfSearchInTree()
+        {
+            this._foundResult = false;
+            this._founndByContent = false;
+            this._founndByTreeNode = false;
+            this._foundByThopology = false;
+            this._depthLevel = 0;
+            this._siblingOrder = 0;
+
+        }
+
+        public ResultOfSearchInTree(I foundElementOfTreeContent) : this ()
+        {
+            this._foundResult = true;
+            this._founndByContent = true;
+            this._foundElementOfTreeContent = foundElementOfTreeContent;
+        }
+
+        public ResultOfSearchInTree(ITreeNode<I> foundTreeNode) : this()
+        {
+            this._foundResult = true;
+            this._founndByTreeNode = true;
+            this._foundTreeNode = foundTreeNode;
+        }
+
+        public ResultOfSearchInTree(int depthLevel, int siblingOrder) : this()
+        {
+            this._foundResult = true;
+            this._foundByThopology = true;
+            this._depthLevel = depthLevel;
+            this._siblingOrder = siblingOrder;
+        }
+
+
+
+        public bool IsResultFound() => this._foundResult;
+        public bool IsResultRepresentedByContent() => this._founndByContent;
+        public bool IsResultRepresantedByTreeNode() => this._founndByTreeNode;
+        public bool ISResultRepresantedByThopology() => this._foundByThopology;
 
     }
 }
