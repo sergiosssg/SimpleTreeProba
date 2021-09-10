@@ -6,14 +6,14 @@ namespace TreeLib
 {
     public class ResultOfSearchInTree<I> where I : IElementOfTreeContent
     {
-        private bool _foundResult;
-        private bool _founndByContent;
-        private I _foundElementOfTreeContent;
-        private bool _founndByTreeNode;
-        private ITreeNode<I> _foundTreeNode;
-        private bool _foundByThopology;
-        private int _depthLevel;
-        private int _siblingOrder;
+        readonly private bool _foundResult;
+        readonly private bool _founndByContent;
+        readonly private I _foundElementOfTreeContent;
+        readonly private bool _founndByTreeNode;
+        readonly private ITreeNode<I> _foundTreeNode;
+        readonly private bool _foundByThopology;
+        readonly private int _depthLevel;
+        readonly private int _siblingOrder;
 
         public ResultOfSearchInTree()
         {
