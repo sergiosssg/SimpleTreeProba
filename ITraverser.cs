@@ -22,7 +22,8 @@ namespace TreeLib
 
         public bool SearchNodeInTree(
                                       in ITreeNode<I> treeNodeWhereSearching,
-                                      in GoalOfSearchInTree<I> goalOfSearchInTree);
+                                      in GoalOfSearchInTree<I> goalOfSearchInTree,
+                                      out ResultOfSearchInTree<I> resultOfSearchInTree);
 
 
     }
