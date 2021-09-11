@@ -20,10 +20,9 @@ namespace TreeLib
             get;
         }
 
-        public bool SearchNodeInTree(
+        public ResultOfSearchInTree<I> SearchNodeInTree(
                                       in ITreeNode<I> treeNodeWhereSearching,
-                                      in GoalOfSearchInTree<I> goalOfSearchInTree,
-                                      out ResultOfSearchInTree<I> resultOfSearchInTree);
+                                      in GoalOfSearchInTree<I> goalOfSearchInTree);
 
 
     }
