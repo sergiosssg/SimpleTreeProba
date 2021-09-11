@@ -88,14 +88,11 @@ namespace TreeLib
             {
                 ITreeNode<I> fondTreeNode;
                 bool resultOfFound = this.JumpIntoNextNodeByNodeSample(in treeNodeWhereSearching, in goalOfSearchInTree.treeNode, out fondTreeNode);
-                ResultOfSearchInTree<I> resultOfSearchInTree;
                 if(resultOfFound && fondTreeNode != null)
                 {
-                    resultOfSearchInTree = new ResultOfSearchInTree<I>(fondTreeNode);
-                    return resultOfSearchInTree;
+                    return new ResultOfSearchInTree<I>(fondTreeNode);
                 }
-                resultOfSearchInTree = new ResultOfSearchInTree<I>();
-                return resultOfSearchInTree;
+                return new ResultOfSearchInTree<I>();
             }
             else if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategyOfTreeNode.COMPARING_BY_CONTENT_ONLY)
             {
