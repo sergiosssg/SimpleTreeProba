@@ -84,6 +84,28 @@ namespace TreeLib
                                in ITreeNode<I> treeNodeWhereSearching, 
                                in GoalOfSearchInTree<I> goalOfSearchInTree)
         {
+            if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategyOfTreeNode.COMPARING_BY_NODE)
+            {
+                ITreeNode<I> fondTreeNode;
+                bool resultOfFound = this.JumpIntoNextNodeByNodeSample(in treeNodeWhereSearching, in goalOfSearchInTree.treeNode, out fondTreeNode);
+                ResultOfSearchInTree<I> resultOfSearchInTree;
+                if(resultOfFound && fondTreeNode != null)
+                {
+                    resultOfSearchInTree = new ResultOfSearchInTree<I>(fondTreeNode);
+                    return resultOfSearchInTree;
+                }
+                resultOfSearchInTree = new ResultOfSearchInTree<I>();
+                return resultOfSearchInTree;
+            }
+            else if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategyOfTreeNode.COMPARING_BY_CONTENT_ONLY)
+            {
+
+            }
+            else if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategyOfTreeNode.COMPARING_BY_TOPOLOGY)
+            {
+
+            }
+
             throw new NotImplementedException();
         }
 
