@@ -24,6 +24,18 @@ namespace TreeLib
             this._stringValue = newStringValue;
         }
 
+        public override bool Equals(object obj)
+        {
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+
+            return 0;
+        }
+
 
         public bool IsEmpty() => _empty;
 
