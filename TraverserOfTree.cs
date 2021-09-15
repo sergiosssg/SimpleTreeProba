@@ -115,7 +115,7 @@ namespace TreeLib
                 treeNode = treeNodeWhereSearching;
                 return true;
             }
-            if(treeNodeWhereSearching.AmIleaf() && nodeForSearchingSample.AmIleaf())
+            if( false) //(treeNodeWhereSearching.AmIleaf() && nodeForSearchingSample.AmIleaf())
             {
                 bool returnOfPredicate = _predicateIsFoundNode( treeNodeWhereSearching, nodeForSearchingSample);
                 if (returnOfPredicate)
