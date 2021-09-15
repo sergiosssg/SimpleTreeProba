@@ -35,12 +35,6 @@ namespace TreeLib
                 this._AmIleaf = newTree._AmIleaf;
                 this._parent = newTree._parent;
                 this._children = newTree._children;
-            }else if(treeNode != null && treeNode is TreeNodeSimple<T>)
-            {
-                TreeNodeSimple<T> newNodeSimple = (TreeNodeSimple<T>)treeNode;
-                this._elementOfTreeContent = newNodeSimple.GetCurrentElement();
-                this._AmIleaf = true;
-                this._parent = newNodeSimple.GetParent();
             }
 
         }
