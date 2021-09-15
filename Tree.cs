@@ -4,76 +4,29 @@ using System.Text;
 
 namespace TreeLib
 {
-    public class Tree<T> : ITreeNode<T> where T : IElementOfTreeContent
+    public class Tree<T>  where T : IElementOfTreeContent
     {
-        private T _elementOfTreeContent;
+        #region Fields
+        private ITreeNode<T> _root = null;
+        private List<ITreeNode<T>> _nodes = new List<ITreeNode<T>>();
+        #endregion
 
-        private bool _AmIleaf;
-        private ITreeNode<T> _parent;
-        private IList<ITreeNode<T>> _children;
-
-        private Tree()
+        #region Constructors
+        public Tree( T content)
         {
-            _AmIleaf = true;
-            _parent = null;
-            _children = new List<ITreeNode<T>>();
-            _children.Clear();
+
         }
+        #endregion
 
-        public Tree(T contentElement) : this()
+        #region Properties
+        public int Count
         {
-            _elementOfTreeContent = contentElement;
-        }
-
-
-        public Tree(ITreeNode<T> treeNode) : this()
-        {
-            if(treeNode != null && treeNode is Tree<T>)
+            get
             {
-                Tree<T> newTree = (Tree<T>)treeNode;
-                this._elementOfTreeContent = newTree._elementOfTreeContent;
-                this._AmIleaf = newTree._AmIleaf;
-                this._parent = newTree._parent;
-                this._children = newTree._children;
+                return _nodes.Count;
             }
-
         }
+        #endregion
 
-
-        public Tree(T contentElement, ITreeNode<T> parentNode) : this (contentElement)
-        {
-            _parent = parentNode;
-        }
-
-
-        public Tree(T contentElement, ITreeNode<T> parentNode, IEnumerable<ITreeNode<T>> childen)
-        {
-
-        }
-
-        public bool AmIleaf() => _AmIleaf;
-        T ITreeNode<T>.GetCurrentElement() => _elementOfTreeContent;
-
-
-        public IEnumerable<ITreeNode<T>> GetChildren()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ITreeNode<T> GetParent()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool HaveIparent()
-        {
-            if (_parent == null) return false;
-            else return true;
-        }
-
-        public bool HaveIchildren()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
