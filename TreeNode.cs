@@ -44,8 +44,8 @@ namespace TreeLib
             set => this._parent = (TreeNode<T>)value; 
         }
 
-        public IEnumerable<ITreeNode<T>> Children => 
-            _childern.AsReadOnly();
+        public IList<ITreeNode<T>> Children => 
+            this._childern.AsReadOnly();
         #endregion
 
         #region Methods

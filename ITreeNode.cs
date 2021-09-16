@@ -24,7 +24,7 @@ namespace TreeLib
             set;
         }
 
-        public IEnumerable<ITreeNode<T>> Children 
+        public IList<ITreeNode<T>> Children 
         {
             get;
         }
