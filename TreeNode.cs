@@ -53,13 +53,32 @@ namespace TreeLib
         /// <returns>  true if the child was added, false otherwise</returns>
         public bool AddChild(ITreeNode<T> child)
         {
-            throw new NotImplementedException();
+            // don't add duplicate children
+            if(this._childern.Contains(child))
+            {
+                return false;
+            }
+            else if (child == this)
+            {
+                return false;
+            }
+            else
+            {
+                this._childern.Add(child);
+                child.Parent = this;
+                return true;
+            }
         }
 
         /// <returns> true if the all children are removed, false otherwise </returns>
         public bool RemoveAllChildren()
         {
-            throw new NotImplementedException();
+            for(int i= this._childern.Count - 1; i>= 0; i--)
+            {
+                this._childern[i].Parent = null;
+                this._childern.RemoveAt(i);
+            }
+            return true;
         }
 
         /// <summary>
@@ -69,7 +88,17 @@ namespace TreeLib
         /// <returns> true if the child was removed, false otherwise</returns>
         public bool RemoveChild(ITreeNode<T> child)
         {
-            throw new NotImplementedException();
+            // only remove child in list
+            if (this._childern.Contains(child))
+            {
+                child.Parent = null;
+                return this._childern.Remove(child);
+            }
+            else
+            {
+                return false;
+            }
+
         }
         #endregion
     }
