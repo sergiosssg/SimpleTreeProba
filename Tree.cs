@@ -7,6 +7,7 @@ namespace TreeLib
     public class Tree<T>  where T : IElementOfTreeContent
     {
         #region Fields
+        private bool _consistentState;
         private ITreeNode<T> _root = null;
         private List<ITreeNode<T>> _nodes = new List<ITreeNode<T>>();
         #endregion
@@ -14,7 +15,7 @@ namespace TreeLib
         #region Constructors
         public Tree( T content)
         {
-
+            this._consistentState = true;
         }
         #endregion
 
@@ -30,6 +31,15 @@ namespace TreeLib
         public ITreeNode<T> Root
         {
             get => this._root;
+        }
+
+        public bool ConsistentState
+        {
+            get  => this._consistentState;
+            set
+            {
+                this._consistentState = value;
+            }
         }
         #endregion
 
@@ -53,6 +63,7 @@ namespace TreeLib
                 this._nodes.RemoveAt(i);
             }
             this._root = null;
+            this._consistentState = false;
         }
 
         /// <summary>
@@ -77,13 +88,12 @@ namespace TreeLib
             {
                 // add child as tree node and as a child to parent
                 this._nodes.Add( node);
+                this._consistentState = false;
                 return node.Parent.AddChild( node);
             }
 
 
         }
-
-
 
         /// <summary>
         ///    Rempves the given node from the tree
@@ -129,6 +139,7 @@ namespace TreeLib
                         this.RemoveNode(children[i]);
                     }
                 }
+                this._consistentState = false;
                 return true;
             }
         }
