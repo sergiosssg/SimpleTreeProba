@@ -83,6 +83,56 @@ namespace TreeLib
 
         }
 
+
+
+        /// <summary>
+        ///    Rempves the given node from the tree
+        ///  If the node isn't found in the tree, the method returns false.
+        ///  Note that the subtree with the node to remove as its root is pruned
+        ///  from tree.
+        /// </summary>
+        /// <param name="removedNode"> node to remove</param>
+        /// <returns> true if successful, false otherwise</returns>
+        public bool RemoveNode(ITreeNode<T> removedNode)
+        {
+            if(removedNode == null)
+            {
+                return false;
+            }
+            else if(removedNode == this._root)
+            {
+                // removing the root, clears the tree
+                this.Clear();
+                return true;
+            }
+            else
+            {
+                // remove as child of parent
+                bool successReturned = removedNode.Parent.RemoveChild(removedNode);
+                if(!successReturned)
+                {
+                    return false;
+                }
+                // remove node from tree
+                successReturned = this._nodes.Remove(removedNode);
+                if (!successReturned)
+                {
+                    return false;
+                }
+                // check for branch node
+                if(removedNode.Children.Count > 0)
+                {
+                    // recursively prune subtree
+                    IList<ITreeNode<T>> children = removedNode.Children;
+                    for (int i = children.Count - 1; i >= 0; i--)
+                    {
+                        this.RemoveNode(children[i]);
+                    }
+                }
+                return true;
+            }
+        }
+
         #endregion
     }
 }
