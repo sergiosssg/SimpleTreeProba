@@ -19,7 +19,7 @@ namespace TreeLib
     public interface ITraverser<I>  where I : IElementOfTreeContent
     {
 
-        public delegate IEnumerable<ITreeNode<I>> MakeupCandidatesOfTreeNodesForTraversing(
+        public delegate IEnumerable<ITreeNode<I>> ComposerOfCandidatesForTreeTraversor(
                        in ITreeNode<I> treeNodeWhereSearching,
                        TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree);
 
