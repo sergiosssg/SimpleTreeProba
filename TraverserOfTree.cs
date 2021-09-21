@@ -12,7 +12,7 @@ namespace TreeLib
 
         private bool _isConstintentState;
 
-        private PredicateComparingTreeNodeAndSmple<I> _predicateComparingTreeNodeAndSmplee;
+        private PredicateComparingTreeNodeAndSample<I> _predicateComparingTreeNodeAndSmplee;
         private ITreeNode<I> _treeNode;
 
         private ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing _delegateMakeupCandidatesOfTreeNodesForTraversing;
@@ -32,20 +32,20 @@ namespace TreeLib
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateComparing) : this(treeNode)
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing) : this(treeNode)
         {
             this._predicateComparingTreeNodeAndSmplee = predicateComparing;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateComparing, 
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing, 
             TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree) : this(treeNode, predicateComparing)
         {
             this._typeOfTraversingStrategyOfTree = typeOfTraversingStrategyOfTree;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateComparing,
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing,
             TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree,
             ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateComparing, typeOfTraversingStrategyOfTree)
         {
@@ -68,7 +68,7 @@ namespace TreeLib
         }
 
 
-        public PredicateComparingTreeNodeAndSmple<I> PredicateComparingTreeNode
+        public PredicateComparingTreeNodeAndSample<I> PredicateComparingTreeNode
         {
             set
             {

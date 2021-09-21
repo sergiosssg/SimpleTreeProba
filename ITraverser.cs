@@ -12,7 +12,7 @@ namespace TreeLib
     /// <param name="treeNodeForComparing"> node with which we compare sample</param>
     /// <param name="goalOfSearch"> sample is to one node should be compared</param>
     /// <returns> true , when first argument is equal to sample , false otherwise </returns>
-    public delegate bool PredicateComparingTreeNodeAndSmple<T> (
+    public delegate bool PredicateComparingTreeNodeAndSample<T> (
                        in ITreeNode<T> treeNodeForComparing,
                        GoalOfSearchInTree<T> goalOfSearch) where T : IElementOfTreeContent;
 
