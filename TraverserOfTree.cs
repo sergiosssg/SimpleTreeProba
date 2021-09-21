@@ -12,7 +12,7 @@ namespace TreeLib
 
         private bool _isConstintentState;
 
-        private ITraverser<I>.PredicateForSearchInTree _predicateIsFoundNode;
+        private PredicateForSearchInTree<I> _predicateIsFoundNode;
         private ITreeNode<I> _treeNode;
 
         private ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing _delegateMakeupCandidatesOfTreeNodesForTraversing;
@@ -30,20 +30,20 @@ namespace TreeLib
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, ITraverser<I>.PredicateForSearchInTree predicateIsFoundNode) : this(treeNode)
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForSearchInTree<I> predicateIsFoundNode) : this(treeNode)
         {
             this._predicateIsFoundNode = predicateIsFoundNode;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, ITraverser<I>.PredicateForSearchInTree predicateIsFoundNode, 
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForSearchInTree<I> predicateIsFoundNode, 
             TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree) : this(treeNode, predicateIsFoundNode)
         {
             this._typeOfTraversingStrategyOfTree = typeOfTraversingStrategyOfTree;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, ITraverser<I>.PredicateForSearchInTree predicateIsFoundNode,
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForSearchInTree<I> predicateIsFoundNode,
             TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree,
             ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateIsFoundNode, typeOfTraversingStrategyOfTree)
         {
@@ -63,7 +63,7 @@ namespace TreeLib
         }
 
 
-        public ITraverser<I>.PredicateForSearchInTree PredicateForTraversingOfTreeByNodeIn
+        public PredicateForSearchInTree<I> PredicateForTraversingOfTreeByNodeIn
         {
             set
             {

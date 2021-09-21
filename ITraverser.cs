@@ -4,11 +4,12 @@ using System.Text;
 
 namespace TreeLib
 {
+    public delegate bool PredicateForSearchInTree<T> (
+                       in ITreeNode<T> treeNodeWhereSearching,
+                       in ITreeNode<T> nodeForSearchingSample) where T : IElementOfTreeContent;
+
     public interface ITraverser<I>  where I : IElementOfTreeContent
     {
-        public delegate bool PredicateForSearchInTree(
-                       in ITreeNode<I> treeNodeWhereSearching,
-                       in ITreeNode<I> nodeForSearchingSample);
 
         public delegate IEnumerable<ITreeNode<I>> MakeupCandidatesOfTreeNodesForTraversing(
                        in ITreeNode<I> treeNodeWhereSearching,
