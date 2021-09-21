@@ -8,7 +8,7 @@ namespace TreeLib
     {
 
         #region Fields
-        private TypeOfTraversingStrategyOfTree _typeOfTraversingStrategyOfTree;
+        private TypeOfTraversingStrategy _typeOfTraversingStrategyOfTree;
 
         private bool _isConstintentState;
 
@@ -22,7 +22,7 @@ namespace TreeLib
         #region Constructors
         public TraverserOfTree()
         {
-            this._typeOfTraversingStrategyOfTree = TypeOfTraversingStrategyOfTree.DEPTH_FIRST;
+            this._typeOfTraversingStrategyOfTree = TypeOfTraversingStrategy.DEPTH_FIRST;
             this._isConstintentState = true;
         }
 
@@ -39,14 +39,14 @@ namespace TreeLib
 
 
         public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing, 
-            TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree) : this(treeNode, predicateComparing)
+            TypeOfTraversingStrategy typeOfTraversingStrategyOfTree) : this(treeNode, predicateComparing)
         {
             this._typeOfTraversingStrategyOfTree = typeOfTraversingStrategyOfTree;
         }
 
 
         public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing,
-            TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree,
+            TypeOfTraversingStrategy typeOfTraversingStrategyOfTree,
             ITraverser<I>.ComposerOfCandidatesForTreeTraversor makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateComparing, typeOfTraversingStrategyOfTree)
         {
             this._delegateMakeupCandidatesOfTreeNodesForTraversing = makeupCandidatesOfTreeNodesForTraversing;

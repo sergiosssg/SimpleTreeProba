@@ -21,7 +21,7 @@ namespace TreeLib
 
         public delegate IEnumerable<ITreeNode<I>> ComposerOfCandidatesForTreeTraversor(
                        in ITreeNode<I> treeNodeWhereSearching,
-                       TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree);
+                       TypeOfTraversingStrategy typeOfTraversingStrategyOfTree);
 
 
         public bool IsConstintentState
