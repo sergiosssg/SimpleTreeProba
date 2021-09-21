@@ -12,7 +12,7 @@ namespace TreeLib
 
         private bool _isConstintentState;
 
-        private PredicateForSearchInTree<I> _predicateIsFoundNode;
+        private PredicateComparingTreeNodeAndSmple<I> _predicateIsFoundNode;
         private ITreeNode<I> _treeNode;
 
         private ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing _delegateMakeupCandidatesOfTreeNodesForTraversing;
@@ -30,20 +30,20 @@ namespace TreeLib
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForSearchInTree<I> predicateIsFoundNode) : this(treeNode)
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateIsFoundNode) : this(treeNode)
         {
             this._predicateIsFoundNode = predicateIsFoundNode;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForSearchInTree<I> predicateIsFoundNode, 
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateIsFoundNode, 
             TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree) : this(treeNode, predicateIsFoundNode)
         {
             this._typeOfTraversingStrategyOfTree = typeOfTraversingStrategyOfTree;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateForSearchInTree<I> predicateIsFoundNode,
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateIsFoundNode,
             TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree,
             ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateIsFoundNode, typeOfTraversingStrategyOfTree)
         {
@@ -63,7 +63,7 @@ namespace TreeLib
         }
 
 
-        public PredicateForSearchInTree<I> PredicateForTraversingOfTreeByNodeIn
+        public PredicateComparingTreeNodeAndSmple<I> PredicateForTraversingOfTreeByNodeIn
         {
             set
             {
@@ -108,6 +108,9 @@ namespace TreeLib
 
         protected bool  JumpIntoNextNodeByNodeSample(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample, out ITreeNode<I> treeNode)
         {
+
+            //  this  method need to be raplaced by new one
+
             treeNode = null;
             if (!_isConstintentState ||  treeNodeWhereSearching == null || nodeForSearchingSample == null) return false;
             if(treeNodeWhereSearching == nodeForSearchingSample || treeNodeWhereSearching.Equals(nodeForSearchingSample))
@@ -117,14 +120,14 @@ namespace TreeLib
             }
             if( false) //(treeNodeWhereSearching.AmIleaf() && nodeForSearchingSample.AmIleaf())
             {
-                bool returnOfPredicate = _predicateIsFoundNode( treeNodeWhereSearching, nodeForSearchingSample);
+                bool returnOfPredicate = false; ///  _predicateIsFoundNode( treeNodeWhereSearching, nodeForSearchingSample);
                 if (returnOfPredicate)
                 {
                     treeNode = treeNodeWhereSearching;
                 }
                 return returnOfPredicate;
             }
-            if (_predicateIsFoundNode(treeNodeWhereSearching, nodeForSearchingSample))
+            if ( false) ///(_predicateIsFoundNode(treeNodeWhereSearching, nodeForSearchingSample))
             {
                 treeNode = treeNodeWhereSearching;
                 return true;

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace TreeLib
 {
-    public delegate bool PredicateForSearchInTree<T> (
-                       in ITreeNode<T> treeNodeWhereSearching,
-                       in ITreeNode<T> nodeForSearchingSample) where T : IElementOfTreeContent;
+    public delegate bool PredicateComparingTreeNodeAndSmple<T> (
+                       in ITreeNode<T> treeNodeForComparing,
+                       GoalOfSearchInTree<T> goalOfSearch) where T : IElementOfTreeContent;
 
     public interface ITraverser<I>  where I : IElementOfTreeContent
     {
