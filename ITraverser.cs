@@ -6,9 +6,9 @@ namespace TreeLib
 {
     public interface ITraverser<I>  where I : IElementOfTreeContent
     {
-        public delegate bool PredicateForTraversingOfTreeByNode(
-                       ITreeNode<I> treeNodeWhereSearching,
-                       in ITreeNode<I> nodeForSearchingSample);
+        public delegate bool PredicateForSearchInTree(
+                       in ITreeNode<I> treeWhereWeSearc,
+                       in ITreeNode<I> treeNodeSample);
 
         public delegate IEnumerable<ITreeNode<I>> MakeupCandidatesOfTreeNodesForTraversing(
                        in ITreeNode<I> treeNodeWhereSearching,
