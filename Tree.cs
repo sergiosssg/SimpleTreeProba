@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TreeLib
 {
-    public class Tree<T>  where T : IElementOfTreeContent
+    public class Tree<T> : ITree<T> where T : IElementOfTreeContent
     {
         #region Fields
         private bool _consistentState;
