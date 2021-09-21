@@ -7,17 +7,19 @@ namespace TreeLib
     public class TraverserOfTree<I> : ITraverser<I> where I : IElementOfTreeContent
     {
 
-
+        #region Fields
         private TypeOfTraversingStrategyOfTree _typeOfTraversingStrategyOfTree;
 
         private bool _isConstintentState;
 
-        private PredicateComparingTreeNodeAndSmple<I> _predicateIsFoundNode;
+        private PredicateComparingTreeNodeAndSmple<I> _predicateComparingTreeNodeAndSmplee;
         private ITreeNode<I> _treeNode;
 
         private ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing _delegateMakeupCandidatesOfTreeNodesForTraversing;
+        #endregion
 
 
+        #region Constructors
         public TraverserOfTree()
         {
             this._typeOfTraversingStrategyOfTree = TypeOfTraversingStrategyOfTree.DEPTH_FIRST;
@@ -30,26 +32,29 @@ namespace TreeLib
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateIsFoundNode) : this(treeNode)
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateComparing) : this(treeNode)
         {
-            this._predicateIsFoundNode = predicateIsFoundNode;
+            this._predicateComparingTreeNodeAndSmplee = predicateComparing;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateIsFoundNode, 
-            TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree) : this(treeNode, predicateIsFoundNode)
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateComparing, 
+            TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree) : this(treeNode, predicateComparing)
         {
             this._typeOfTraversingStrategyOfTree = typeOfTraversingStrategyOfTree;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateIsFoundNode,
+        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSmple<I> predicateComparing,
             TypeOfTraversingStrategyOfTree typeOfTraversingStrategyOfTree,
-            ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateIsFoundNode, typeOfTraversingStrategyOfTree)
+            ITraverser<I>.MakeupCandidatesOfTreeNodesForTraversing makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateComparing, typeOfTraversingStrategyOfTree)
         {
             this._delegateMakeupCandidatesOfTreeNodesForTraversing = makeupCandidatesOfTreeNodesForTraversing;
         }
+        #endregion
 
+
+        #region Properties
         public bool IsConstintentState
         {
             get
@@ -63,11 +68,11 @@ namespace TreeLib
         }
 
 
-        public PredicateComparingTreeNodeAndSmple<I> PredicateForTraversingOfTreeByNodeIn
+        public PredicateComparingTreeNodeAndSmple<I> PredicateComparingTreeNode
         {
             set
             {
-                this._predicateIsFoundNode = value;
+                this._predicateComparingTreeNodeAndSmplee = value;
             }
         }
 
@@ -79,6 +84,7 @@ namespace TreeLib
                 this._delegateMakeupCandidatesOfTreeNodesForTraversing = value;
             }
         }
+        #endregion
 
         public ResultOfSearchInTree<I> SearchNodeInTree(
                                in ITreeNode<I> treeNodeWhereSearching, 
