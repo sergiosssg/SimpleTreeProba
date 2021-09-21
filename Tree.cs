@@ -41,6 +41,21 @@ namespace TreeLib
                 this._consistentState = value;
             }
         }
+
+        /// <summary>
+        ///    Gets  all  nodes  of  that tree, despite where and when they added
+        /// </summary>
+        public IEnumerable<ITreeNode<T>> AllNodes
+        {
+            get
+            {
+                if (_consistentState)
+                {
+                    return _nodes.AsReadOnly();
+                }
+                return null;
+            }
+        }
         #endregion
 
         #region Methods
