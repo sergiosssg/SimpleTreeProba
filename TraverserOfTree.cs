@@ -84,7 +84,7 @@ namespace TreeLib
                                in ITreeNode<I> treeNodeWhereSearching, 
                                in GoalOfSearchInTree<I> goalOfSearchInTree)
         {
-            if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategyOfTreeNode.COMPARING_BY_NODE)
+            if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_NODE)
             {
                 ITreeNode<I> fondTreeNode;
                 bool resultOfFound = this.JumpIntoNextNodeByNodeSample(in treeNodeWhereSearching, in goalOfSearchInTree.treeNode, out fondTreeNode);
@@ -94,11 +94,11 @@ namespace TreeLib
                 }
                 return new ResultOfSearchInTree<I>();
             }
-            else if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategyOfTreeNode.COMPARING_BY_CONTENT_ONLY)
+            else if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_CONTENT_ONLY)
             {
 
             }
-            else if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategyOfTreeNode.COMPARING_BY_TOPOLOGY)
+            else if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_TOPOLOGY)
             {
 
             }

@@ -6,7 +6,7 @@ namespace TreeLib
 {
     public struct GoalOfSearchInTree<I> where I : IElementOfTreeContent
     {
-        public TypeOfComparingStrategyOfTreeNode typeOfComparingStrategyOfTreeNode;
+        public TypeOfComparingStrategy typeOfComparingStrategyOfTreeNode;
         public ITreeNode<I> treeNode;
         public I nodeContent;
         public int depthLevel;
