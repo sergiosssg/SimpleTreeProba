@@ -15,7 +15,7 @@ namespace TreeLib
         private PredicateComparingTreeNodeAndSample<I> _predicateComparingTreeNodeAndSmplee;
         private ITreeNode<I> _treeNode;
 
-        private ITraverser<I>.ComposerOfCandidatesForTreeTraversor _delegateMakeupCandidatesOfTreeNodesForTraversing;
+        private ComposerOfCandidatesForTreeTraversor<I> _delegateMakeupCandidatesOfTreeNodesForTraversing;
         #endregion
 
 
@@ -47,7 +47,7 @@ namespace TreeLib
 
         public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing,
             TypeOfTraversingStrategy typeOfTraversingStrategyOfTree,
-            ITraverser<I>.ComposerOfCandidatesForTreeTraversor makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateComparing, typeOfTraversingStrategyOfTree)
+            ComposerOfCandidatesForTreeTraversor<I> makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateComparing, typeOfTraversingStrategyOfTree)
         {
             this._delegateMakeupCandidatesOfTreeNodesForTraversing = makeupCandidatesOfTreeNodesForTraversing;
         }
@@ -77,7 +77,7 @@ namespace TreeLib
         }
 
 
-        public ITraverser<I>.ComposerOfCandidatesForTreeTraversor DelegateMakeupCandidatesOfTreeNodesForTraversingOfTree
+        public ComposerOfCandidatesForTreeTraversor<I> DelegateMakeupCandidatesOfTreeNodesForTraversingOfTree
         {
             set
             {

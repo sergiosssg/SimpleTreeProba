@@ -16,13 +16,21 @@ namespace TreeLib
                        in ITreeNode<T> treeNodeForComparing,
                        GoalOfSearchInTree<T> goalOfSearch) where T : IElementOfTreeContent;
 
+
+    /// <summary>
+    ///   This  delegate  makes up  list for traversing of tree nodes through
+    /// </summary>
+    /// <typeparam name="T"> any object type implemented  IElementOfTreeContent interface  </typeparam>
+    /// <param name="treeNodeWhereSearching"> tree node to make candidates </param>
+    /// <param name="typeOfTraversingStrategyOfTree"> type how need to traverse tree, width first, or depth first</param>
+    /// <returns> IEnumerable of that tree nodes, they aren't traversed yet</returns>
+    public delegate IEnumerable<ITreeNode<T>> ComposerOfCandidatesForTreeTraversor<T>(
+                       in ITreeNode<T> treeNodeWhereSearching,
+                       TypeOfTraversingStrategy typeOfTraversingStrategyOfTree) where T : IElementOfTreeContent;
+
+
     public interface ITraverser<I>  where I : IElementOfTreeContent
     {
-
-        public delegate IEnumerable<ITreeNode<I>> ComposerOfCandidatesForTreeTraversor(
-                       in ITreeNode<I> treeNodeWhereSearching,
-                       TypeOfTraversingStrategy typeOfTraversingStrategyOfTree);
-
 
         public bool IsConstintentState
         {
