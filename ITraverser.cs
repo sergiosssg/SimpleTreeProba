@@ -38,7 +38,6 @@ namespace TreeLib
         }
 
         public ResultOfSearchInTree<I> SearchNodeInTree(
-                                      in ITreeNode<I> treeNodeWhereSearching,
                                       in GoalOfSearchInTree<I> goalOfSearchInTree);
 
 

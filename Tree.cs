@@ -45,7 +45,7 @@ namespace TreeLib
         /// <summary>
         ///    Gets  all  nodes  of  that tree, despite where and when they added
         /// </summary>
-        public IEnumerable<ITreeNode<T>> AllNodes
+        public IList<ITreeNode<T>> AllNodes
         {
             get
             {

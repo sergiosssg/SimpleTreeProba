@@ -13,43 +13,54 @@ namespace TreeLib
         private bool _isConstintentState;
 
         private PredicateComparingTreeNodeAndSample<I> _predicateComparingTreeNodeAndSmplee;
-        private ITreeNode<I> _treeNode;
+        private ITree<I> _tree;
 
-        private ComposerOfCandidatesForTreeTraversor<I> _delegateMakeupCandidatesOfTreeNodesForTraversing;
+        protected Stack<ITreeNode<I>> _treeNodesUntouched;
+        protected Stack<ITreeNode<I>> _treeNodesTouched;
+
+
+        private ComposerOfCandidatesForTreeTraversor<I> _delegateComposerOfCandidatesForTreeTraversor;
         #endregion
 
 
         #region Constructors
         public TraverserOfTree()
         {
+            this._treeNodesUntouched = new Stack<ITreeNode<I>>();
+            this._treeNodesTouched = new Stack<ITreeNode<I>>();
             this._typeOfTraversingStrategyOfTree = TypeOfTraversingStrategy.DEPTH_FIRST;
             this._isConstintentState = true;
         }
 
-        public TraverserOfTree(ITreeNode<I> treeNode) : this()
+        public TraverserOfTree(ITree<I> tree) : this()
         {
-            this._treeNode = treeNode;
+            this._tree = tree;
+            Stack<ITreeNode<I>> treeNodesUntouched;
+            if(this.PopulateStackFromTree(in tree, out treeNodesUntouched))
+            {
+                this._treeNodesUntouched = treeNodesUntouched;
+            }
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing) : this(treeNode)
+        public TraverserOfTree(ITree<I> tree, PredicateComparingTreeNodeAndSample<I> predicateComparing) : this(tree)
         {
             this._predicateComparingTreeNodeAndSmplee = predicateComparing;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing, 
-            TypeOfTraversingStrategy typeOfTraversingStrategyOfTree) : this(treeNode, predicateComparing)
+        public TraverserOfTree(ITree<I> tree, PredicateComparingTreeNodeAndSample<I> predicateComparing, 
+            TypeOfTraversingStrategy typeOfTraversingStrategyOfTree) : this(tree, predicateComparing)
         {
             this._typeOfTraversingStrategyOfTree = typeOfTraversingStrategyOfTree;
         }
 
 
-        public TraverserOfTree(ITreeNode<I> treeNode, PredicateComparingTreeNodeAndSample<I> predicateComparing,
+        public TraverserOfTree(ITree<I> tree, PredicateComparingTreeNodeAndSample<I> predicateComparing,
             TypeOfTraversingStrategy typeOfTraversingStrategyOfTree,
-            ComposerOfCandidatesForTreeTraversor<I> makeupCandidatesOfTreeNodesForTraversing) : this(treeNode, predicateComparing, typeOfTraversingStrategyOfTree)
+            ComposerOfCandidatesForTreeTraversor<I> delegateComposerOfCandidatesForTreeTraversor) : this(tree, predicateComparing, typeOfTraversingStrategyOfTree)
         {
-            this._delegateMakeupCandidatesOfTreeNodesForTraversing = makeupCandidatesOfTreeNodesForTraversing;
+            this._delegateComposerOfCandidatesForTreeTraversor = delegateComposerOfCandidatesForTreeTraversor;
         }
         #endregion
 
@@ -77,27 +88,40 @@ namespace TreeLib
         }
 
 
-        public ComposerOfCandidatesForTreeTraversor<I> DelegateMakeupCandidatesOfTreeNodesForTraversingOfTree
+        public ComposerOfCandidatesForTreeTraversor<I> DelegateComposerOfCandidates
         {
             set
             {
-                this._delegateMakeupCandidatesOfTreeNodesForTraversing = value;
+                this._delegateComposerOfCandidatesForTreeTraversor = value;
             }
         }
         #endregion
 
-        #region Methods
+        #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="goalOfSearchInTree"></param>
+        /// <returns> instance of ResultOfSearchInTree, when successful value isn't default, and default otherwise</returns>
         public ResultOfSearchInTree<I> SearchNodeInTree(
-                               in ITreeNode<I> treeNodeWhereSearching, 
                                in GoalOfSearchInTree<I> goalOfSearchInTree)
         {
+            if(this._tree == null || !this._tree.ConsistentState)
+            {
+                return new ResultOfSearchInTree<I>();
+            }
+
             if (goalOfSearchInTree.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_NODE)
             {
-                ITreeNode<I> fondTreeNode;
-                bool resultOfFound = this.JumpIntoNextNodeByNodeSample(in treeNodeWhereSearching, in goalOfSearchInTree.treeNode, out fondTreeNode);
-                if(resultOfFound && fondTreeNode != null)
+                ITreeNode<I> foundTreeNode;
+
+                ITreeNode<I> currTreeNode = this._treeNodesUntouched.Pop();
+
+                bool resultOfFound = this.JumpIntoNextNodeByNodeSample(in currTreeNode, in goalOfSearchInTree.treeNode, out foundTreeNode);
+                if(resultOfFound && foundTreeNode != null)
                 {
-                    return new ResultOfSearchInTree<I>(fondTreeNode);
+                    return new ResultOfSearchInTree<I>(foundTreeNode);
                 }
                 return new ResultOfSearchInTree<I>();
             }
@@ -113,6 +137,18 @@ namespace TreeLib
             throw new NotImplementedException();
         }
 
+        #endregion
+
+
+        #region Protected Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="treeNodeWhereSearching"></param>
+        /// <param name="nodeForSearchingSample"></param>
+        /// <param name="treeNode"></param>
+        /// <returns></returns>
         protected bool  JumpIntoNextNodeByNodeSample(in ITreeNode<I> treeNodeWhereSearching, in ITreeNode<I> nodeForSearchingSample, out ITreeNode<I> treeNode)
         {
 
@@ -140,7 +176,7 @@ namespace TreeLib
                 return true;
             }
 
-            IEnumerable<ITreeNode<I>> treeNodeCandidates = _delegateMakeupCandidatesOfTreeNodesForTraversing(in treeNodeWhereSearching, _typeOfTraversingStrategyOfTree);
+            IEnumerable<ITreeNode<I>> treeNodeCandidates = _delegateComposerOfCandidatesForTreeTraversor(in treeNodeWhereSearching, _typeOfTraversingStrategyOfTree);
 
             foreach(var oneTreeNode in treeNodeCandidates)
             {
@@ -152,6 +188,39 @@ namespace TreeLib
                 }
             }
             return false;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        ///   Factory  method  for creating  stack of  untouched  nodes of tree for  trsversing
+        /// </summary>
+        /// <param name="tree"> tree of nodes for which is created such stack</param>
+        /// <param name="stackOfTreeNods"> output parameter where stak is returned </param>
+        /// <returns> true if successfull, false otherwise</returns>
+        private bool PopulateStackFromTree(in ITree<I> tree, out Stack<ITreeNode<I>> stackOfTreeNods)
+        {
+            stackOfTreeNods = null;
+
+            if (tree == null || tree.Count == 0)
+            {
+                return false;
+            }
+
+            stackOfTreeNods = new Stack<ITreeNode<I>>(tree.Count + 2);
+
+            stackOfTreeNods.Push(tree.Root);
+
+            var treeNodes = tree.AllNodes;
+
+            for (int i = treeNodes.Count - 1; i >= 0; i--)
+            {
+                stackOfTreeNods.Push(treeNodes[i]);
+            }
+
+            return true;
         }
 
 
