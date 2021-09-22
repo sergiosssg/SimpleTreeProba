@@ -86,6 +86,7 @@ namespace TreeLib
         }
         #endregion
 
+        #region Methods
         public ResultOfSearchInTree<I> SearchNodeInTree(
                                in ITreeNode<I> treeNodeWhereSearching, 
                                in GoalOfSearchInTree<I> goalOfSearchInTree)
@@ -155,5 +156,6 @@ namespace TreeLib
 
 
 
+        #endregion
     }
 }
