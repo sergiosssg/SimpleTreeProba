@@ -6,6 +6,22 @@ namespace TreeLib
 {
     public class TreeTraversingContext<T> where T : IElementOfTreeContent
     {
+        #region Variables
+        private Stack<ITreeNode<T>> _untouchedNodes;
+        private Stack<ITreeNode<T>> _touchedNodes;
+
+        #endregion
+
+        #region Constructors
+        public TreeTraversingContext()
+        {
+            _untouchedNodes = new Stack<ITreeNode<T>>();
+            _touchedNodes = new Stack<ITreeNode<T>>();
+        }
+
+
+        #endregion
+
 
         #region Properties
         /// <summary>
