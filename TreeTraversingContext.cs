@@ -7,18 +7,41 @@ namespace TreeLib
     public class TreeTraversingContext<T> where T : IElementOfTreeContent
     {
         #region Variables
+        private bool _is_TreeConsistent;
         private Stack<ITreeNode<T>> _untouchedNodes;
         private Stack<ITreeNode<T>> _touchedNodes;
+        private ITree<T> _treeOfNodes;
 
         #endregion
 
         #region Constructors
         public TreeTraversingContext()
         {
-            _untouchedNodes = new Stack<ITreeNode<T>>();
-            _touchedNodes = new Stack<ITreeNode<T>>();
+            this._is_TreeConsistent = false;
+            this._untouchedNodes = new Stack<ITreeNode<T>>();
+            this._touchedNodes = new Stack<ITreeNode<T>>();
+            this._treeOfNodes = null;
         }
 
+
+        public TreeTraversingContext(ITree<T> treeOfNodes) : this()
+        {
+            if(treeOfNodes != null)
+            {
+                this._treeOfNodes = treeOfNodes;
+                this._untouchedNodes = new Stack<ITreeNode<T>>(this._treeOfNodes.Count + 1);
+                IList<ITreeNode<T>> treeNodes = this._treeOfNodes.AllNodes;
+                for (int ii = treeNodes.Count - 1; ii >= 0; ii--)
+                {
+                    this._untouchedNodes.Push(treeNodes[ii]);
+                }
+                if (!this._treeOfNodes.ConsistentState)
+                {
+                    this._treeOfNodes.ConsistentState = true;
+                }
+                this._is_TreeConsistent = true;
+            }
+        }
 
         #endregion
 
@@ -40,7 +63,7 @@ namespace TreeLib
         /// </summary>
         public Stack<ITreeNode<T>> UntouchedNodes
         {
-            get;
+            get => this._untouchedNodes;
         }
 
         /// <summary>
@@ -48,7 +71,7 @@ namespace TreeLib
         /// </summary>
         public Stack<ITreeNode<T>> TouchedNodes
         {
-            get;
+            get => this._touchedNodes;
         }
 
         /// <summary>
@@ -56,6 +79,7 @@ namespace TreeLib
         /// </summary>
         public ITree<T> CurrentTree
         {
+            set;
             get;
         }
 
@@ -64,7 +88,18 @@ namespace TreeLib
         /// </summary>
         public bool IsTreeConsistent
         {
-            get;
+            get  
+            {
+                if(this._treeOfNodes == null)
+                {
+                    this._is_TreeConsistent = false;
+                }
+                else
+                {
+                    this._is_TreeConsistent = this._treeOfNodes.ConsistentState;
+                }
+                return this._is_TreeConsistent;
+            } 
         }
 
         /// <summary>
