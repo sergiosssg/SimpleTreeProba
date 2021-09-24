@@ -7,6 +7,7 @@ namespace TreeLib
     public class TreeTraversingContext<T> where T : IElementOfTreeContent
     {
         #region Variables
+        
         private bool _is_TreeConsistent;
         private Stack<ITreeNode<T>> _untouchedNodes;
         private Stack<ITreeNode<T>> _touchedNodes;
@@ -17,6 +18,9 @@ namespace TreeLib
         #region Constructors
         public TreeTraversingContext()
         {
+            this.BacktrackingToggle = false;
+            this.IsOrderInWidthDefined = false;
+            this.IsLevelInDepthDefined = false;
             this._is_TreeConsistent = false;
             this._untouchedNodes = new Stack<ITreeNode<T>>();
             this._touchedNodes = new Stack<ITreeNode<T>>();
