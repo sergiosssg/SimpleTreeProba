@@ -79,7 +79,7 @@ namespace TreeLib
         /// </summary>
         public ITree<T> CurrentTree
         {
-            set;
+            protected set;
             get;
         }
 
