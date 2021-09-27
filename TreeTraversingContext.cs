@@ -87,7 +87,7 @@ namespace TreeLib
         {
             get  
             {
-                if(this._treeOfNodes == null)
+                if(this._treeOfNodes == null || this._untouchedNodes == null || this._touchedNodes == null)
                 {
                     this._is_TreeConsistent = false;
                 }
@@ -149,7 +149,16 @@ namespace TreeLib
         /// <returns></returns>
         public bool ResetContext()
         {
-            return true;
+
+            this._touchedNodes.Clear();
+            this.InitUntouchedNodes(this._treeOfNodes, this._untouchedNodes);
+            if (_treeOfNodes != null && _untouchedNodes != null && _touchedNodes != null)
+            {
+                return (this._is_TreeConsistent = this._treeOfNodes.ConsistentState = true);
+
+            }
+            this._is_TreeConsistent = false;
+            return false;
         }
 
         /// <summary>
@@ -167,8 +176,6 @@ namespace TreeLib
         /// <returns></returns>
         public bool ResetOrderInWidth()
         {
-            this._touchedNodes.Clear();
-            this.InitUntouchedNodes(this._treeOfNodes, this._untouchedNodes);
             return true;
         }
         #endregion
