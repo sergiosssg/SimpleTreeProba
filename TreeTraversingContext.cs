@@ -227,6 +227,23 @@ namespace TreeLib
                 this._is_TreeConsistent = true;
             }
         }
+        
+        /// <summary>
+        ///   Checks out whether or not current node of tree has upper node
+        /// </summary>
+        ///   true if the node has upper node, false otherwise
+        /// <returns></returns>
+        protected bool HasParent()
+        {
+            if (this.IsTreeConsistent && this._currentTreeNode != _treeOfNodes.Root)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         #endregion
 
