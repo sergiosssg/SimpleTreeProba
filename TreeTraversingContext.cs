@@ -9,7 +9,7 @@ namespace TreeLib
         #region Variables
         
         private bool _is_TreeConsistent;
-        private Stack<ITreeNode<T>> _untouchedNodes;
+        private IList<ITreeNode<T>> _untouchedNodes;
         private Stack<ITreeNode<T>> _touchedNodes;
         private ITree<T> _treeOfNodes;
 
@@ -22,7 +22,7 @@ namespace TreeLib
             this.IsOrderInWidthDefined = false;
             this.IsLevelInDepthDefined = false;
             this._is_TreeConsistent = false;
-            this._untouchedNodes = new Stack<ITreeNode<T>>();
+            this._untouchedNodes = new List<ITreeNode<T>>();
             this._touchedNodes = new Stack<ITreeNode<T>>();
             this._treeOfNodes = null;
         }
@@ -33,11 +33,11 @@ namespace TreeLib
             if(treeOfNodes != null)
             {
                 this._treeOfNodes = treeOfNodes;
-                this._untouchedNodes = new Stack<ITreeNode<T>>(this._treeOfNodes.Count + 1);
+                this._untouchedNodes = new List<ITreeNode<T>>(this._treeOfNodes.Count + 1);
                 IList<ITreeNode<T>> treeNodes = this._treeOfNodes.AllNodes;
-                for (int ii = treeNodes.Count - 1; ii >= 0; ii--)
+                foreach (var oneTreeNode in treeNodes)
                 {
-                    this._untouchedNodes.Push(treeNodes[ii]);
+                    this._untouchedNodes.Add(oneTreeNode);
                 }
                 if (!this._treeOfNodes.ConsistentState)
                 {
@@ -65,7 +65,7 @@ namespace TreeLib
         /// <summary>
         /// 
         /// </summary>
-        public Stack<ITreeNode<T>> UntouchedNodes
+        public IList<ITreeNode<T>> UntouchedNodes
         {
             get => this._untouchedNodes;
         }
