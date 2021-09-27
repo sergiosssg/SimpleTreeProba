@@ -245,6 +245,23 @@ namespace TreeLib
             }
         }
 
+        /// <summary>
+        ///  Checks out whether or not current node of tree has children
+        /// </summary>
+        ///   true if the node has children nodes, false otherwise
+        /// <returns></returns>
+        protected bool HasChildren()
+        {
+            if (this.IsTreeConsistent && this._currentTreeNode.Children.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #endregion
 
 
