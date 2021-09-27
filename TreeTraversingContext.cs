@@ -211,7 +211,7 @@ namespace TreeLib
         /// <param name="untouchedTreeNodes"> list of tree nodes, which we initialize</param>
         protected void InitUntouchedNodes(ITree<T> treeOfNodes)
         {
-            if (treeOfNodes != null)
+            if (treeOfNodes != null && treeOfNodes.Count > 0)
             {
                 this._treeOfNodes = treeOfNodes;
                 this._untouchedNodes.Clear();
