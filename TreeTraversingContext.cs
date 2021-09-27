@@ -6,35 +6,47 @@ namespace TreeLib
 {
     public class TreeTraversingContext<T> where T : IElementOfTreeContent
     {
-        #region Variables
-        
+        #region Private Variables
         private bool _is_TreeConsistent;
         readonly private IList<ITreeNode<T>> _untouchedNodes;
         readonly private Stack<ITreeNode<T>> _touchedNodes;
         private ITree<T> _treeOfNodes;
         private ITreeNode<T> _currentTreeNode;
-
         #endregion
+        #region Protected Variables
+        protected PredicateComparingTreeNodeAndSample<T> _predicateComparingTreeNodeAndSample;
+        protected ComposerOfCandidatesForTreeTraversor<T> _composerOfCandidatesForTreeTraversor;
+        protected int _orderInWidth;
+        protected int _levelInDepth;
+        #endregion
+
+
 
         #region Constructors
         public TreeTraversingContext()
         {
+            this._orderInWidth = this._levelInDepth = 0;
             this.BacktrackingToggle = false;
-            this.IsOrderInWidthDefined = false;
-            this.IsLevelInDepthDefined = false;
+            //this.IsOrderInWidthDefined = false;
+            //this.IsLevelInDepthDefined = false;
             this._is_TreeConsistent = false;
             this._untouchedNodes = new List<ITreeNode<T>>();
             this._touchedNodes = new Stack<ITreeNode<T>>();
             this._treeOfNodes = null;
             this._currentTreeNode = null;
+            this._composerOfCandidatesForTreeTraversor = DefaultComposerOfCandidates;
+            this._predicateComparingTreeNodeAndSample = DefaultPredicateComparing;
         }
 
 
         public TreeTraversingContext(ITree<T> treeOfNodes)
         {
-            this.BacktrackingToggle = this.IsOrderInWidthDefined  = this.IsLevelInDepthDefined  =  false;
-
+            this._orderInWidth = this._levelInDepth = 0;
+            this.BacktrackingToggle = false; //this.IsOrderInWidthDefined  = this.IsLevelInDepthDefined  =  false;
             this._touchedNodes = new Stack<ITreeNode<T>>();
+
+            this._composerOfCandidatesForTreeTraversor = DefaultComposerOfCandidates;
+            this._predicateComparingTreeNodeAndSample = DefaultPredicateComparing;
 
             if (treeOfNodes != null)
             {
@@ -42,7 +54,6 @@ namespace TreeLib
                 this._untouchedNodes = new List<ITreeNode<T>>(this._treeOfNodes.Count + 1);
                 this.InitUntouchedNodes(treeOfNodes);
                 this._currentTreeNode = this._treeOfNodes.Root;
-
             }
             else
             {
@@ -50,7 +61,6 @@ namespace TreeLib
                 this._is_TreeConsistent = false;
                 this._currentTreeNode = null;
             }
-
         }
 
         #endregion
@@ -135,7 +145,7 @@ namespace TreeLib
         /// </summary>
         public bool IsOrderInWidthDefined
         {
-            get;
+            get => this._orderInWidth > 0 ;
         }
 
         /// <summary>
@@ -143,7 +153,7 @@ namespace TreeLib
         /// </summary>
         public int OrderInWidth
         {
-            get;
+            get => this._orderInWidth;
         }
 
         /// <summary>
@@ -151,7 +161,7 @@ namespace TreeLib
         /// </summary>
         public bool IsLevelInDepthDefined
         {
-            get;
+            get => this._levelInDepth > 0 ;
         }
 
         /// <summary>
@@ -159,8 +169,32 @@ namespace TreeLib
         /// </summary>
         public  int LevelInDepth
         {
-            get;
+            get => this._levelInDepth;
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ComposerOfCandidatesForTreeTraversor<T> ComposerOfCandidatesForTreeTraversorProperty
+        {
+            set
+            {
+                this._composerOfCandidatesForTreeTraversor = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public PredicateComparingTreeNodeAndSample<T> PredicateComparingTreeNodeAndSampleProperty
+        {
+            set
+            {
+                this._predicateComparingTreeNodeAndSample = value;
+            }
+        }
+
         #endregion
 
 
@@ -169,9 +203,26 @@ namespace TreeLib
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="prevTreeNode"></param>
+        /// <returns></returns>
+        public ResultOfSearchInTree<T> FindNext(ITreeNode<T> currTreeNode, GoalOfSearchInTree<T> goalOfSearch)
+        {
+            ResultOfSearchInTree<T> result;
+            if (this.IsTreeConsistent)
+            {
+
+            }
+
+            return new ResultOfSearchInTree<T>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public bool ResetContext()
         {
+            this._orderInWidth = this._levelInDepth = 0;
             this._touchedNodes.Clear();
             if (this._treeOfNodes != null && this._untouchedNodes != null && this._touchedNodes != null)
             {
@@ -189,6 +240,7 @@ namespace TreeLib
         /// <returns></returns>
         public bool ResetLevelInDepth()
         {
+            this._levelInDepth = 0;
             return true;
         }
 
@@ -198,6 +250,7 @@ namespace TreeLib
         /// <returns></returns>
         public bool ResetOrderInWidth()
         {
+            this._orderInWidth = 0;
             return true;
         }
         #endregion
@@ -261,6 +314,36 @@ namespace TreeLib
                 return false;
             }
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="treeNodeWhereSearching"></param>
+        /// <param name="typeOfTraversingStrategyOfTree"></param>
+        /// <returns></returns>
+        protected  IEnumerable<ITreeNode<T>> DefaultComposerOfCandidates<T>(
+                   in ITreeNode<T> treeNodeWhereSearching,
+                   TypeOfTraversingStrategy typeOfTraversingStrategyOfTree) where T : IElementOfTreeContent
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="treeNodeForComparing"></param>
+        /// <param name="goalOfSearch"></param>
+        /// <returns></returns>
+        protected bool DefaultPredicateComparing<T>(
+                       in ITreeNode<T> treeNodeForComparing,
+                       GoalOfSearchInTree<T> goalOfSearch) where T : IElementOfTreeContent
+        {
+            return false;
+        }
+
 
         #endregion
 
