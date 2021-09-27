@@ -12,6 +12,7 @@ namespace TreeLib
         readonly private IList<ITreeNode<T>> _untouchedNodes;
         readonly private Stack<ITreeNode<T>> _touchedNodes;
         private ITree<T> _treeOfNodes;
+        private ITreeNode<T> _currentTreeNode;
 
         #endregion
 
@@ -25,17 +26,29 @@ namespace TreeLib
             this._untouchedNodes = new List<ITreeNode<T>>();
             this._touchedNodes = new Stack<ITreeNode<T>>();
             this._treeOfNodes = null;
+            this._currentTreeNode = null;
         }
 
 
-        public TreeTraversingContext(ITree<T> treeOfNodes) : this()
+        public TreeTraversingContext(ITree<T> treeOfNodes)
         {
+            this.BacktrackingToggle = this.IsOrderInWidthDefined  = this.IsLevelInDepthDefined  =  false;
+
+            this._touchedNodes = new Stack<ITreeNode<T>>();
 
             if (treeOfNodes != null)
             {
                 this._treeOfNodes = treeOfNodes;
                 this._untouchedNodes = new List<ITreeNode<T>>(this._treeOfNodes.Count + 1);
-                this.InitUntouchedNodes(treeOfNodes, null);
+                this.InitUntouchedNodes(treeOfNodes);
+                this._currentTreeNode = this._treeOfNodes.Root;
+
+            }
+            else
+            {
+                this._untouchedNodes = new List<ITreeNode<T>>();
+                this._is_TreeConsistent = false;
+                this._currentTreeNode = null;
             }
 
         }
@@ -76,8 +89,18 @@ namespace TreeLib
         /// </summary>
         public ITree<T> CurrentTree
         {
-            protected set;
-            get;
+            protected set 
+            { 
+                if (value != null)
+                {
+                    this.InitUntouchedNodes( value);
+
+                    this._treeOfNodes.ConsistentState = true;
+
+                    this._is_TreeConsistent = true;
+                }
+            }
+            get => this._treeOfNodes;
         }
 
         /// <summary>
@@ -104,7 +127,7 @@ namespace TreeLib
         /// </summary>
         public ITreeNode<T> CurrentTreeNode
         {
-            get;
+            get => this._currentTreeNode;
         }
 
         /// <summary>
@@ -149,16 +172,15 @@ namespace TreeLib
         /// <returns></returns>
         public bool ResetContext()
         {
-
             this._touchedNodes.Clear();
-            this.InitUntouchedNodes(this._treeOfNodes, this._untouchedNodes);
-            if (_treeOfNodes != null && _untouchedNodes != null && _touchedNodes != null)
+            if (this._treeOfNodes != null && this._untouchedNodes != null && this._touchedNodes != null)
             {
+                this.InitUntouchedNodes(this._treeOfNodes);
+                //this._currentTreeNode = this._treeOfNodes.Root;
                 return (this._is_TreeConsistent = this._treeOfNodes.ConsistentState = true);
 
             }
-            this._is_TreeConsistent = false;
-            return false;
+            return (this._is_TreeConsistent = false);
         }
 
         /// <summary>
@@ -187,14 +209,13 @@ namespace TreeLib
         /// </summary>
         /// <param name="treeOfNodes"> tree of nedes, need to traverse through </param>
         /// <param name="untouchedTreeNodes"> list of tree nodes, which we initialize</param>
-        protected void InitUntouchedNodes(ITree<T> treeOfNodes, IList<ITreeNode<T>> untouchedTreeNodes)
+        protected void InitUntouchedNodes(ITree<T> treeOfNodes)
         {
             if (treeOfNodes != null)
             {
                 this._treeOfNodes = treeOfNodes;
                 this._untouchedNodes.Clear();
-                IList<ITreeNode<T>> treeNodes = this._treeOfNodes.AllNodes;
-                foreach (var oneTreeNode in treeNodes)
+                foreach (var oneTreeNode in this._treeOfNodes.AllNodes)
                 {
                     this._untouchedNodes.Add(oneTreeNode);
                 }
@@ -202,6 +223,7 @@ namespace TreeLib
                 {
                     this._treeOfNodes.ConsistentState = true;
                 }
+                this._currentTreeNode = this._treeOfNodes.Root;
                 this._is_TreeConsistent = true;
             }
         }
