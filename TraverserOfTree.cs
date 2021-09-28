@@ -102,9 +102,13 @@ namespace TreeLib
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="tree"></param>
+        /// <param name="treeNode"></param>
         /// <param name="goalOfSearchInTree"></param>
         /// <returns> instance of ResultOfSearchInTree, when successful value isn't default, and default otherwise</returns>
         public ResultOfSearchInTree<I> SearchNodeInTree(
+                               in ITree<I>  tree,
+                               ITreeNode<I>  treeNode,
                                in GoalOfSearchInTree<I> goalOfSearchInTree)
         {
             if(this._tree == null || !this._tree.ConsistentState)

@@ -205,7 +205,7 @@ namespace TreeLib
         /// </summary>
         /// <param name="prevTreeNode"></param>
         /// <returns></returns>
-        public ResultOfSearchInTree<T> FindNext(ITreeNode<T> currTreeNode, GoalOfSearchInTree<T> goalOfSearch)
+        public ResultOfSearchInTree<T> FindNext(in ITree<T> tree, ITreeNode<T> currTreeNode, in GoalOfSearchInTree<T> goalOfSearch)
         {
             ResultOfSearchInTree<T> result;
             if (this.IsTreeConsistent)
