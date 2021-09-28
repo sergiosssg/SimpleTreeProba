@@ -176,7 +176,9 @@ namespace TreeLib
                 return true;
             }
 
+            /*====================================================
             IEnumerable<ITreeNode<I>> treeNodeCandidates = _delegateComposerOfCandidatesForTreeTraversor(in treeNodeWhereSearching, _typeOfTraversingStrategyOfTree);
+            
 
             foreach(var oneTreeNode in treeNodeCandidates)
             {
@@ -187,6 +189,7 @@ namespace TreeLib
                     return true;
                 }
             }
+            */
             return false;
         }
 

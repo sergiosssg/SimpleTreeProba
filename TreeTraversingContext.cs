@@ -27,13 +27,12 @@ namespace TreeLib
         {
             this._orderInWidth = this._levelInDepth = 0;
             this.BacktrackingToggle = false;
-            //this.IsOrderInWidthDefined = false;
-            //this.IsLevelInDepthDefined = false;
             this._is_TreeConsistent = false;
             this._untouchedNodes = new List<ITreeNode<T>>();
             this._touchedNodes = new Stack<ITreeNode<T>>();
             this._treeOfNodes = null;
             this._currentTreeNode = null;
+
             this._composerOfCandidatesForTreeTraversor = DefaultComposerOfCandidates;
             this._predicateComparingTreeNodeAndSample = DefaultPredicateComparing;
         }
@@ -42,8 +41,9 @@ namespace TreeLib
         public TreeTraversingContext(ITree<T> treeOfNodes)
         {
             this._orderInWidth = this._levelInDepth = 0;
-            this.BacktrackingToggle = false; //this.IsOrderInWidthDefined  = this.IsLevelInDepthDefined  =  false;
+            this.BacktrackingToggle = false;
             this._touchedNodes = new Stack<ITreeNode<T>>();
+
 
             this._composerOfCandidatesForTreeTraversor = DefaultComposerOfCandidates;
             this._predicateComparingTreeNodeAndSample = DefaultPredicateComparing;
@@ -324,11 +324,13 @@ namespace TreeLib
         /// <param name="typeOfTraversingStrategyOfTree"></param>
         /// <returns></returns>
         protected  IEnumerable<ITreeNode<T>> DefaultComposerOfCandidates<T>(
+                   in ITree<T> tree,
                    in ITreeNode<T> treeNodeWhereSearching,
                    TypeOfTraversingStrategy typeOfTraversingStrategyOfTree) where T : IElementOfTreeContent
         {
             return null;
         }
+
 
         /// <summary>
         /// 

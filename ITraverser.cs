@@ -21,10 +21,12 @@ namespace TreeLib
     ///   This  delegate  makes up  list for traversing of tree nodes through
     /// </summary>
     /// <typeparam name="T"> any object type implemented  IElementOfTreeContent interface  </typeparam>
+    /// <param name="tree"> </param>
     /// <param name="treeNodeWhereSearching"> tree node to make candidates </param>
     /// <param name="typeOfTraversingStrategyOfTree"> type how need to traverse tree, width first, or depth first</param>
     /// <returns> IEnumerable of that tree nodes, they aren't traversed yet</returns>
     public delegate IEnumerable<ITreeNode<T>> ComposerOfCandidatesForTreeTraversor<T>(
+                       in ITree<T>   tree,
                        in ITreeNode<T> treeNodeWhereSearching,
                        TypeOfTraversingStrategy typeOfTraversingStrategyOfTree) where T : IElementOfTreeContent;
 
