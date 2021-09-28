@@ -18,12 +18,11 @@ namespace TreeLib
                        in ITreeNode<T> treeNodeForComparing,
                        GoalOfSearchInTree<T> goalOfSearch) where T : IElementOfTreeContent;
 
-
     /// <summary>
     ///   This  delegate  makes up  list for traversing of tree nodes through
     /// </summary>
     /// <typeparam name="T"> any object type implemented  IElementOfTreeContent interface  </typeparam>
-    /// <param name="tree"> </param>
+    /// <param name="tree"> tree, for which compose candidates for ...</param>
     /// <param name="treeNodeWhereSearching"> tree node to make candidates </param>
     /// <param name="typeOfTraversingStrategyOfTree"> type how need to traverse tree, width first, or depth first</param>
     /// <returns> IEnumerable of that tree nodes, they aren't traversed yet</returns>
@@ -31,6 +30,19 @@ namespace TreeLib
                        in ITree<T>   tree,
                        in ITreeNode<T> treeNodeWhereSearching,
                        TypeOfTraversingStrategy typeOfTraversingStrategyOfTree) where T : IElementOfTreeContent;
+
+    /// <summary>
+    ///  This delegate accomplish search of node in the tree
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="tree"></param>
+    /// <param name="treeNode"></param>
+    /// <param name="goalOfSearchInTree"></param>
+    /// <returns></returns>
+    public delegate ResultOfSearchInTree<T> SearcherNodeInTree<T>(
+                       in ITree<T> tree,
+                       ITreeNode<T> treeNode,
+                       in GoalOfSearchInTree<T> goalOfSearchInTree) where T : IElementOfTreeContent;
 
 
     public interface ITraverser<I>  where I : IElementOfTreeContent

@@ -16,6 +16,7 @@ namespace TreeLib
         #region Protected Variables
         protected PredicateComparingTreeNodeAndSample<T> _predicateComparingTreeNodeAndSample;
         protected ComposerOfCandidatesForTreeTraversor<T> _composerOfCandidatesForTreeTraversor;
+        protected SearcherNodeInTree<T> _searcherNodeInTree;
         protected int _orderInWidth;
         protected int _levelInDepth;
         #endregion
@@ -35,6 +36,7 @@ namespace TreeLib
 
             this._composerOfCandidatesForTreeTraversor = DefaultComposerOfCandidates;
             this._predicateComparingTreeNodeAndSample = DefaultPredicateComparing;
+            this._searcherNodeInTree = FindNext;
         }
 
 
@@ -47,6 +49,7 @@ namespace TreeLib
 
             this._composerOfCandidatesForTreeTraversor = DefaultComposerOfCandidates;
             this._predicateComparingTreeNodeAndSample = DefaultPredicateComparing;
+            this._searcherNodeInTree = FindNext;
 
             if (treeOfNodes != null)
             {
@@ -195,6 +198,17 @@ namespace TreeLib
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public SearcherNodeInTree<T> SearcherNodeInTreeProperty
+        {
+            set
+            {
+                this._searcherNodeInTree = value;
+            }
+        }
+
         #endregion
 
 
@@ -207,6 +221,21 @@ namespace TreeLib
         /// <returns></returns>
         public ResultOfSearchInTree<T> FindNext(in ITree<T> tree, ITreeNode<T> currTreeNode, in GoalOfSearchInTree<T> goalOfSearch)
         {
+            if (this._predicateComparingTreeNodeAndSample(in tree, currTreeNode,  goalOfSearch))
+            {
+                if(goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_NODE)
+                {
+                    return ( new ResultOfSearchInTree<T>(currTreeNode));
+                }
+                else if(goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_CONTENT_ONLY)
+                {
+                    return ( new ResultOfSearchInTree<T>(currTreeNode.Content));
+                }
+                else if(goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_TOPOLOGY)
+                {
+                    return ( new ResultOfSearchInTree<T>(this.LevelInDepth, this.OrderInWidth));
+                }
+            }
             ResultOfSearchInTree<T> result;
             if (this.IsTreeConsistent)
             {
