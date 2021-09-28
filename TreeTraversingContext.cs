@@ -336,10 +336,12 @@ namespace TreeLib
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="tree"></param>
         /// <param name="treeNodeForComparing"></param>
         /// <param name="goalOfSearch"></param>
         /// <returns></returns>
         protected bool DefaultPredicateComparing<T>(
+                       in ITree<T> tree,
                        in ITreeNode<T> treeNodeForComparing,
                        GoalOfSearchInTree<T> goalOfSearch) where T : IElementOfTreeContent
         {
