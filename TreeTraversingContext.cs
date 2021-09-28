@@ -309,15 +309,16 @@ namespace TreeLib
                 this._is_TreeConsistent = true;
             }
         }
-        
+
         /// <summary>
         ///   Checks out whether or not current node of tree has upper node
         /// </summary>
+        /// <param name="treeNode"> node of tree, for </param>
         ///   true if the node has upper node, false otherwise
         /// <returns></returns>
-        protected bool HasParent()
+        protected bool HasParent(in ITreeNode<T> treeNode)
         {
-            if (this.IsTreeConsistent && this._currentTreeNode != _treeOfNodes.Root)
+            if (this.IsTreeConsistent && treeNode != _treeOfNodes.Root)
             {
                 return true;
             }
@@ -330,11 +331,12 @@ namespace TreeLib
         /// <summary>
         ///  Checks out whether or not current node of tree has children
         /// </summary>
+        /// <param name="treeNode"> node of tree, for </param>
         ///   true if the node has children nodes, false otherwise
         /// <returns></returns>
-        protected bool HasChildren()
+        protected bool HasChildren(in ITreeNode<T> treeNode)
         {
-            if (this.IsTreeConsistent && this._currentTreeNode.Children.Count > 0)
+            if (this.IsTreeConsistent && treeNode.Children.Count > 0)
             {
                 return true;
             }
