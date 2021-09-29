@@ -316,39 +316,68 @@ namespace TreeLib
         /// <summary>
         ///   Checks out whether or not current node of tree has upper node
         /// </summary>
+        /// <param name="tree"> tree of nodes to cheque </param>
         /// <param name="treeNode"> node of tree, for </param>
         ///   true if the node has upper node, false otherwise
         /// <returns></returns>
-        protected bool HasParent(in ITreeNode<T> treeNode)
+        protected bool HasParent(in ITree<T> tree, in ITreeNode<T> treeNode)
         {
-            if (this.IsTreeConsistent && treeNode != _treeOfNodes.Root)
+            if ( tree == null)
             {
-                return true;
+                if (this.IsTreeConsistent && treeNode != _treeOfNodes.Root)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return false;
+                if(tree.ConsistentState && treeNode != tree.Root)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
         /// <summary>
         ///  Checks out whether or not current node of tree has children
         /// </summary>
+        /// <param name="tree"> tree of nodes to cheque </param>
         /// <param name="treeNode"> node of tree, for </param>
         ///   true if the node has children nodes, false otherwise
         /// <returns></returns>
-        protected bool HasChildren(in ITreeNode<T> treeNode)
+        protected bool HasChildren(in ITree<T> tree, in ITreeNode<T> treeNode)
         {
-            if (this.IsTreeConsistent && treeNode.Children.Count > 0)
+            if ( tree == null)
             {
-                return true;
+                if (this.IsTreeConsistent && treeNode.Children.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return false;
+                if(tree.ConsistentState && treeNode.Children.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
-
 
         /// <summary>
         /// 
