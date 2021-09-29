@@ -45,6 +45,15 @@ namespace TreeLib
                        ITreeNode<T> treeNode,
                        in GoalOfSearchInTree<T> goalOfSearchInTree) where T : IElementOfTreeContent;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="tree"></param>
+    /// <param name="treeNode"></param>
+    /// <returns></returns>
+    public delegate bool PredicateForTreeNode<T>(in ITree<T> tree, in ITreeNode<T> treeNode) where T : IElementOfTreeContent;
+
 
     #endregion
     public interface ITraverser<I>  where I : IElementOfTreeContent
