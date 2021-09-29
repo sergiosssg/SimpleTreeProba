@@ -4,8 +4,13 @@ using System.Text;
 
 namespace TreeLib
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="I"></typeparam>
     public class ResultOfSearchInTree<I> where I : IElementOfTreeContent
     {
+        #region Fields
         readonly private bool _foundResult;
         readonly private bool _founndByContent;
         readonly private I _foundElementOfTreeContent;
@@ -13,8 +18,10 @@ namespace TreeLib
         readonly private ITreeNode<I> _foundTreeNode;
         readonly private bool _foundByThopology;
         readonly private int _depthLevel;
-        readonly private int _siblingOrder;
+        readonly private string _orderInTree;
+        #endregion
 
+        #region Constructors
         public ResultOfSearchInTree()
         {
             this._foundResult = false;
@@ -22,33 +29,28 @@ namespace TreeLib
             this._founndByTreeNode = false;
             this._foundByThopology = false;
             this._depthLevel = 0;
-            this._siblingOrder = 0;
+            this._orderInTree = string.Empty;
 
         }
-
         public ResultOfSearchInTree(I foundElementOfTreeContent) : this ()
         {
             this._foundResult = true;
             this._founndByContent = true;
             this._foundElementOfTreeContent = foundElementOfTreeContent;
         }
-
         public ResultOfSearchInTree(ITreeNode<I> foundTreeNode) : this()
         {
             this._foundResult = true;
             this._founndByTreeNode = true;
             this._foundTreeNode = foundTreeNode;
         }
-
-        public ResultOfSearchInTree(int depthLevel, int siblingOrder) : this()
+        public ResultOfSearchInTree(int depthLevel, string treeOrder) : this()
         {
             this._foundResult = true;
             this._foundByThopology = true;
             this._depthLevel = depthLevel;
-            this._siblingOrder = siblingOrder;
+            this._orderInTree = treeOrder;
         }
-
-
         public ResultOfSearchInTree(I foundElementOfTreeContent, ITreeNode<I> foundTreeNode) : this()
         {
             this._foundResult = true;
@@ -57,29 +59,44 @@ namespace TreeLib
             this._foundElementOfTreeContent = foundElementOfTreeContent;
             this._foundTreeNode = foundTreeNode;
         }
-
-
-        public ResultOfSearchInTree(ITreeNode<I> foundTreeNode, int depthLevel, int siblingOrder) : this()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="foundTreeNode"></param>
+        /// <param name="depthLevel"></param>
+        /// <param name="treeOrder"></param>
+        public ResultOfSearchInTree(ITreeNode<I> foundTreeNode, int depthLevel, string treeOrder) : this()
         {
             this._foundResult = true;
             this._founndByTreeNode = true;
             this._foundByThopology = true;
             this._foundTreeNode = foundTreeNode;
             this._depthLevel = depthLevel;
-            this._siblingOrder = siblingOrder;
+            this._orderInTree = treeOrder;
         }
-
-        public ResultOfSearchInTree(I foundElementOfTreeContent, int depthLevel, int siblingOrder) : this()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="foundElementOfTreeContent"></param>
+        /// <param name="depthLevel"></param>
+        /// <param name="treeOrder"></param>
+        public ResultOfSearchInTree(I foundElementOfTreeContent, int depthLevel, string treeOrder) : this()
         {
             this._foundResult = true;
             this._founndByContent = true;
             this._foundByThopology = true;
             this._foundElementOfTreeContent = foundElementOfTreeContent;
             this._depthLevel = depthLevel;
-            this._siblingOrder = siblingOrder;
+            this._orderInTree = treeOrder;
         }
-
-        public ResultOfSearchInTree(I foundElementOfTreeContent, ITreeNode<I> foundTreeNode, int depthLevel, int siblingOrder)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="foundElementOfTreeContent"></param>
+        /// <param name="foundTreeNode"></param>
+        /// <param name="depthLevel"></param>
+        /// <param name="treeOrder"></param>
+        public ResultOfSearchInTree(I foundElementOfTreeContent, ITreeNode<I> foundTreeNode, int depthLevel, string treeOrder)
         {
             this._foundResult = true;
             this._founndByContent = true;
@@ -88,11 +105,12 @@ namespace TreeLib
             this._foundElementOfTreeContent = foundElementOfTreeContent;
             this._foundTreeNode = foundTreeNode;
             this._depthLevel = depthLevel;
-            this._siblingOrder = siblingOrder;
+            this._orderInTree = treeOrder;
         }
+        #endregion
 
 
-
+        #region Properties
         public bool IsResultFound() => this._foundResult;
         public bool IsResultRepresentedByContent() => this._founndByContent;
         public bool IsResultRepresantedByTreeNode() => this._founndByTreeNode;
@@ -107,10 +125,13 @@ namespace TreeLib
         {
             get => this._foundTreeNode;
         }
-
-        public Tuple<int, int> FoundThopology
+        /// <summary>
+        /// 
+        /// </summary>
+        public Tuple<int, string> FoundThopology
         {
-            get =>  new Tuple<int, int>(this._depthLevel, this._siblingOrder); 
+            get =>  new Tuple<int, string>(this._depthLevel, this._orderInTree); 
         }
+        #endregion
     }
 }

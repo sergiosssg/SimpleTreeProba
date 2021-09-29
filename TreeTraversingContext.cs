@@ -17,7 +17,7 @@ namespace TreeLib
         protected PredicateComparingTreeNodeAndSample<T> _predicateComparingTreeNodeAndSample;
         protected ComposerOfCandidatesForTreeTraversor<T> _composerOfCandidatesForTreeTraversor;
         protected SearcherNodeInTree<T> _searcherNodeInTree;
-        protected int _orderInWidth;
+        protected StringBuilder _orderInTree;
         protected int _levelInDepth;
         #endregion
 
@@ -26,7 +26,8 @@ namespace TreeLib
         #region Constructors
         public TreeTraversingContext()
         {
-            this._orderInWidth = this._levelInDepth = 0;
+            this._orderInTree = new StringBuilder();
+            this._levelInDepth = 0;
             this.BacktrackingToggle = false;
             this._is_TreeConsistent = false;
             this._untouchedNodes = new List<ITreeNode<T>>();
@@ -42,7 +43,8 @@ namespace TreeLib
 
         public TreeTraversingContext(ITree<T> treeOfNodes)
         {
-            this._orderInWidth = this._levelInDepth = 0;
+            this._orderInTree = new StringBuilder();
+            this._levelInDepth = 0;
             this.BacktrackingToggle = false;
             this._touchedNodes = new Stack<ITreeNode<T>>();
 
@@ -146,17 +148,17 @@ namespace TreeLib
         /// <summary>
         /// 
         /// </summary>
-        public bool IsOrderInWidthDefined
+        public bool IsOrderInTreeDefined
         {
-            get => this._orderInWidth > 0 ;
+            get => (this._orderInTree != null && this._orderInTree.Length > 0 &&  !this._orderInTree.ToString().Equals(string.Empty));
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public int OrderInWidth
+        public string OrderInTree
         {
-            get => this._orderInWidth;
+            get => this._orderInTree.ToString();
         }
 
         /// <summary>
@@ -233,7 +235,7 @@ namespace TreeLib
                 }
                 else if(goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_TOPOLOGY)
                 {
-                    return ( new ResultOfSearchInTree<T>(this.LevelInDepth, this.OrderInWidth));
+                    return ( new ResultOfSearchInTree<T>(this.LevelInDepth, this.OrderInTree));
                 }
             }
             ResultOfSearchInTree<T> result;
@@ -251,7 +253,8 @@ namespace TreeLib
         /// <returns></returns>
         public bool ResetContext()
         {
-            this._orderInWidth = this._levelInDepth = 0;
+            this._orderInTree.Clear();
+            this._levelInDepth = 0;
             this._touchedNodes.Clear();
             if (this._treeOfNodes != null && this._untouchedNodes != null && this._touchedNodes != null)
             {
@@ -277,9 +280,9 @@ namespace TreeLib
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool ResetOrderInWidth()
+        public bool ResetOrderInTree()
         {
-            this._orderInWidth = 0;
+            this._orderInTree.Clear();
             return true;
         }
         #endregion

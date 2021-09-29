@@ -37,13 +37,17 @@ namespace TreeLib
             get => this._contentValue; 
             set => this._contentValue = value; 
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
         public ITreeNode<T> Parent 
         { 
             get => this._parent; 
             set => this._parent = (TreeNode<T>)value; 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<ITreeNode<T>> Children => 
             this._childern.AsReadOnly();
         #endregion

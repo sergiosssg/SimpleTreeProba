@@ -4,6 +4,7 @@ using System.Text;
 
 namespace TreeLib
 {
+    #region Delegates
     /// <summary>
     ///   This predicate compare sample with given node of tree, if comparing true, predicate should return true,
     ///   and false otherwise
@@ -45,6 +46,7 @@ namespace TreeLib
                        in GoalOfSearchInTree<T> goalOfSearchInTree) where T : IElementOfTreeContent;
 
 
+    #endregion
     public interface ITraverser<I>  where I : IElementOfTreeContent
     {
 
