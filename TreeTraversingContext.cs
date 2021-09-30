@@ -14,6 +14,7 @@ namespace TreeLib
         private ITreeNode<T> _currentTreeNode;
         #endregion
         #region Protected Variables
+        readonly protected TypeOfTraversingStrategy _typeOfTraversingStrategyOfTree;
         protected PredicateComparingTreeNodeAndSample<T> _predicateComparingTreeNodeAndSample;
         protected ComposerOfCandidatesForTreeTraversor<T> _composerOfCandidatesForTreeTraversor;
         protected SearcherNodeInTree<T> _searcherNodeInTree;
@@ -28,6 +29,7 @@ namespace TreeLib
         #region Constructors
         public TreeTraversingContext()
         {
+            this._typeOfTraversingStrategyOfTree = TypeOfTraversingStrategy.WIDTH_FIRST;
             this._orderInTree = new StringBuilder();
             this._levelInDepth = 0;
             this.BacktrackingToggle = false;
@@ -47,6 +49,7 @@ namespace TreeLib
 
         public TreeTraversingContext(ITree<T> treeOfNodes)
         {
+            this._typeOfTraversingStrategyOfTree = TypeOfTraversingStrategy.WIDTH_FIRST;
             this._orderInTree = new StringBuilder();
             this._levelInDepth = 0;
             this.BacktrackingToggle = false;
@@ -238,6 +241,17 @@ namespace TreeLib
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public TypeOfTraversingStrategy TypeOfTraversingStrategyProperty
+        {
+            get
+            {
+                return this._typeOfTraversingStrategyOfTree;
+            }
+        }
+
         #endregion
 
 
@@ -250,24 +264,39 @@ namespace TreeLib
         /// <returns></returns>
         public ResultOfSearchInTree<T> FindNext(in ITree<T> tree, ITreeNode<T> currTreeNode, in GoalOfSearchInTree<T> goalOfSearch)
         {
-            if (this._predicateComparingTreeNodeAndSample(in tree, currTreeNode,  goalOfSearch))
-            {
-                if(goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_NODE)
-                {
-                    return ( new ResultOfSearchInTree<T>(currTreeNode));
-                }
-                else if(goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_CONTENT_ONLY)
-                {
-                    return ( new ResultOfSearchInTree<T>(currTreeNode.Content));
-                }
-                else if(goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_TOPOLOGY)
-                {
-                    return ( new ResultOfSearchInTree<T>(this.LevelInDepth, this.OrderInTree));
-                }
-            }
             ResultOfSearchInTree<T> result;
             if (this.IsTreeConsistent)
             {
+                if (this._predicateComparingTreeNodeAndSample(in tree, currTreeNode, goalOfSearch))
+                {
+                    if (goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_NODE)
+                    {
+                        return (new ResultOfSearchInTree<T>(currTreeNode));
+                    }
+                    else if (goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_CONTENT_ONLY)
+                    {
+                        return (new ResultOfSearchInTree<T>(currTreeNode.Content));
+                    }
+                    else if (goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_TOPOLOGY)
+                    {
+                        return (new ResultOfSearchInTree<T>(this.LevelInDepth, this.OrderInTree));
+                    }
+                }
+                else if ( !this._predicateTreeNodeCheckerChildren( in tree, in currTreeNode))
+                {
+                    return ( new ResultOfSearchInTree<T>());
+                }
+                else if (this._predicateTreeNodeCheckerParent(in tree, in currTreeNode))
+                {
+
+                }
+                var treeNodesCandidates = this._composerOfCandidatesForTreeTraversor(in tree, in currTreeNode, this.TypeOfTraversingStrategyProperty);
+
+                foreach(var eachTreeNode in treeNodesCandidates)
+                {
+                    var resultOfSearchingInTree = this._searcherNodeInTree(in tree, eachTreeNode, in goalOfSearch);
+                }
+
 
             }
 
