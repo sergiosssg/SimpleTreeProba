@@ -17,6 +17,8 @@ namespace TreeLib
         protected PredicateComparingTreeNodeAndSample<T> _predicateComparingTreeNodeAndSample;
         protected ComposerOfCandidatesForTreeTraversor<T> _composerOfCandidatesForTreeTraversor;
         protected SearcherNodeInTree<T> _searcherNodeInTree;
+        protected PredicateForTreeNode<T> _predicateTreeNodeCheckerParent;
+        protected PredicateForTreeNode<T> _predicateTreeNodeCheckerChildren;
         protected StringBuilder _orderInTree;
         protected int _levelInDepth;
         #endregion
@@ -37,6 +39,8 @@ namespace TreeLib
 
             this._composerOfCandidatesForTreeTraversor = DefaultComposerOfCandidates;
             this._predicateComparingTreeNodeAndSample = DefaultPredicateComparing;
+            this._predicateTreeNodeCheckerParent = HasParent;
+            this._predicateTreeNodeCheckerChildren = HasChildren;
             this._searcherNodeInTree = FindNext;
         }
 
@@ -51,6 +55,8 @@ namespace TreeLib
 
             this._composerOfCandidatesForTreeTraversor = DefaultComposerOfCandidates;
             this._predicateComparingTreeNodeAndSample = DefaultPredicateComparing;
+            this._predicateTreeNodeCheckerParent = HasParent;
+            this._predicateTreeNodeCheckerChildren = HasChildren;
             this._searcherNodeInTree = FindNext;
 
             if (treeOfNodes != null)
@@ -177,7 +183,6 @@ namespace TreeLib
             get => this._levelInDepth;
         }
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -208,6 +213,28 @@ namespace TreeLib
             set
             {
                 this._searcherNodeInTree = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public PredicateForTreeNode<T> PredicateTreeNodeCheckerParentProperty
+        {
+            set
+            {
+                this._predicateTreeNodeCheckerParent = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public PredicateForTreeNode<T> PredicateTreeNodeCheckerChildrenProperty
+        {
+            set
+            {
+                this._predicateTreeNodeCheckerChildren = value;
             }
         }
 
