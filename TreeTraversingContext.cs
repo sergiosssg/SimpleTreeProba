@@ -261,12 +261,15 @@ namespace TreeLib
         /// 
         /// </summary>
         /// <param name="prevTreeNode"></param>
+        /// <param name="currTreeNode"></param>
+        /// <param name="goalOfSearch"></param>
         /// <returns></returns>
         public ResultOfSearchInTree<T> FindNext(in ITree<T> tree, ITreeNode<T> currTreeNode, in GoalOfSearchInTree<T> goalOfSearch)
         {
             ResultOfSearchInTree<T> result;
             if (this.IsTreeConsistent)
             {
+                var treeNodesCandidates = this._composerOfCandidatesForTreeTraversor(in tree, in currTreeNode, this.TypeOfTraversingStrategyProperty);
                 if (this._predicateComparingTreeNodeAndSample(in tree, currTreeNode, goalOfSearch))
                 {
                     if (goalOfSearch.typeOfComparingStrategyOfTreeNode == TypeOfComparingStrategy.COMPARING_BY_NODE)
@@ -282,24 +285,23 @@ namespace TreeLib
                         return (new ResultOfSearchInTree<T>(this.LevelInDepth, this.OrderInTree));
                     }
                 }
-                else if ( !this._predicateTreeNodeCheckerChildren( in tree, in currTreeNode))
+                else if (this._predicateTreeNodeCheckerParent(in tree, in currTreeNode) && !this._predicateTreeNodeCheckerChildren( in tree, in currTreeNode))
                 {
-                    return ( new ResultOfSearchInTree<T>());
+                    return ( new ResultOfSearchInTree<T>(true, true));
                 }
-                else if (this._predicateTreeNodeCheckerParent(in tree, in currTreeNode))
+                else if (!this._predicateTreeNodeCheckerChildren(in tree, in currTreeNode))
                 {
-
+                    return (new ResultOfSearchInTree<T>(false, true));
                 }
-                var treeNodesCandidates = this._composerOfCandidatesForTreeTraversor(in tree, in currTreeNode, this.TypeOfTraversingStrategyProperty);
-
                 foreach(var eachTreeNode in treeNodesCandidates)
                 {
                     var resultOfSearchingInTree = this._searcherNodeInTree(in tree, eachTreeNode, in goalOfSearch);
+                    if (resultOfSearchingInTree.IsResultFound())
+                    {
+                        return resultOfSearchingInTree;
+                    }
                 }
-
-
             }
-
             return new ResultOfSearchInTree<T>();
         }
 
